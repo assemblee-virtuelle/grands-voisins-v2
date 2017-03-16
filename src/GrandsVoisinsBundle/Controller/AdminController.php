@@ -9,6 +9,7 @@ use GrandsVoisinsBundle\Form\AdminSettings;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use VirtualAssembly\SemanticFormsBundle\SemanticFormsClient;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,6 +24,15 @@ class AdminController extends Controller
 
     public function profileAction(Request $request)
     {
+
+
+
+        $form = $this->get('form.factory')->create(\GrandsVoisinsBundle\Form\ProfileType::class);
+
+        /*
+
+
+
         $user       = $this->GetUser();
         $userSfLink = $this->getUser()->getSfLink();
         $sfClient   = $this->container->get('semantic_forms.client');
@@ -84,17 +94,17 @@ class AdminController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('profile');
-        }
+        }*/
 
         return $this->render(
           'GrandsVoisinsBundle:Admin:profile.html.twig',
           array(
-            "form"       => $form,
-            "graphURI"   => $organisation->getGraphURI(),
+            "form"       => $form->createView(),
+            /*"graphURI"   => $organisation->getGraphURI(),
             'picture'    => $picture->createView(),
             'urlPicture' => ($user->getPictureName(
             )) ? 'http://'.$request->getHost().':'.$request->getPort(
-              ).'/uploads/pictures/'.$user->getPictureName() : null,
+              ).'/uploads/pictures/'.$user->getPictureName() : null,*/
           )
         );
     }

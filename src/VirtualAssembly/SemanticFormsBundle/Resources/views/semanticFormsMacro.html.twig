@@ -1,0 +1,23 @@
+{% macro field(field) %}
+    {#{% set type = field.widgetType|lower|split(' ')[0] %}#}
+    {#{% if( field.label|lower == 'type') %}#}
+        {#<input class="form-control" type="url"#}
+               {#name="%3C{{ organisation.subject }}%3E+%3C{{ field.property }}%3E+%3C{{ field.value }}%3E+."#}
+               {#value="{{ field.value }}" disabled="disabled">#}
+    {#{% else if(type == 'uri') %}#}
+        {#<input class="form-control semantic-forms-field ref"#}
+               {#type="url"#}
+               {#placeholder="http://..."#}
+               {#name="{{ field.htmlName }}"#}
+               {#value="{{ field.value }}">#}
+    {#{% elseif (type == 'dbpedialookup') %}#}
+        {#<select class="form-control semantic-forms-field semantic-forms-field-dbPedia">#}
+        {#</select>#}
+    {#{% else %}#}
+        {#<input class="form-control semantic-forms-field ui-autocomplete-input ref"#}
+               {#type="url"#}
+               {#placeholder=""#}
+               {#name="{{ field.htmlName }}"#}
+               {#value="{{ field.value }}">#}
+    {#{% endif %}#}
+{% endmacro %}
