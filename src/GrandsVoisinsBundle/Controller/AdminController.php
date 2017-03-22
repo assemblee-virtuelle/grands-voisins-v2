@@ -26,7 +26,7 @@ class AdminController extends Controller
         $user       = $this->GetUser();
         $userSfLink = $this->getUser()->getSfLink();
         $sfClient   = $this->container->get('semantic_forms.client');
-
+        //$sfFormBuilder = $this->container->get('semantic_forms.formbuilder');
         $organisationEntity = $this->getDoctrine()->getManager()->getRepository(
           'GrandsVoisinsBundle:Organisation'
         );
@@ -49,6 +49,7 @@ class AdminController extends Controller
               'Une erreur s\'est produite lors de l\'affichage du formulaire'
             );
         }
+        //$form_sf = $sfFormBuilder->createForm($form,$organisation->getGraphURI());
 
         $picture = $this->createFormBuilder($user)
           ->add('pictureName', FileType::class, array('data_class' => null))
@@ -90,6 +91,7 @@ class AdminController extends Controller
           'GrandsVoisinsBundle:Admin:profile.html.twig',
           array(
             "form"       => $form,
+            //"new_form"   => $form_sf->createView(),
             "graphURI"   => $organisation->getGraphURI(),
             'picture'    => $picture->createView(),
           )

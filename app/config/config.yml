@@ -11,9 +11,24 @@ parameters:
     picture_directory: '%kernel.root_dir%/../web/uploads/pictures'
     semantic_forms.prefixes:
         gvoi: "<http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#>"
+    semantic_forms.property:
+        prenom: 'http://xmlns.com/foaf/0.1/givenName'
+        nom: 'http://xmlns.com/foaf/0.1/familyName'
+        mail: 'http://xmlns.com/foaf/0.1/mbox'
+        telephonne: 'http://xmlns.com/foaf/0.1/phone'
+        options:
+            prenom:
+                label: 'prenomConfig'
+            nom:
+                label: 'nomConfig'
+            mail:
+                type: 'email'
+            telephonne:
+                type: 'number'
+                taille: 10
 
 framework:
-    #esi:             ~
+    #esi:            ~
     translator:      ~
     secret:          "%secret%"
     router:

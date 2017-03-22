@@ -2,3 +2,7 @@ services:
     semantic_forms.client:
         class: VirtualAssembly\SemanticFormsBundle\SemanticFormsClient
         arguments: ["%semantic_forms.domain%", "%semantic_forms.login%", "%semantic_forms.password%", "%semantic_forms.timeout%", "%semantic_forms.prefixes%"]
+
+    semantic_forms.formbuilder:
+            class: VirtualAssembly\SemanticFormsBundle\FormBuilder\FormBuilder
+            arguments: ["%semantic_forms.property%","@form.factory"]
