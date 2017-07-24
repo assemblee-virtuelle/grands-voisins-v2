@@ -72,7 +72,7 @@
                     </div>
                 {% endif %}
 
-                {% if form.building is defined  %}
+                {# if form.building is defined  #}
                 <div class="row">
                     <div class="col-xs-6">
                         {{ form_row(form.building) }}
@@ -81,7 +81,7 @@
                         {{ form_row(form.room) }}
                     </div>
                 </div>
-                {% endif %}
+                {# endif #}
                 <div class="row">
                     <div class="col-xs-12">
                         {{ form_row(form.shortDescription, { 'label': 'Description courte' }) }}

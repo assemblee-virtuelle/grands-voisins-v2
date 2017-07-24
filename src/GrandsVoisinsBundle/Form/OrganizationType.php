@@ -237,7 +237,25 @@ class OrganizationType extends AbstractForm
                 [
                     'required' => false,
                 ]
-            );
+            )
+					->add(
+						$builder,
+						'room',
+						TextType::class,
+						[
+							'required' => false,
+						]
+					)
+					->add(
+						$builder,
+						'building',
+						ChoiceType::class,
+						[
+							'placeholder' => 'choisissez un batiment',
+							'choices' => array_flip(GrandsVoisinsConfig::$buildingsSimple),
+						]
+					);
+
         //dump(array_flip($options['role']));
         //filter for field only available for aurore
         if(array_key_exists('ROLE_SUPER_ADMIN',array_flip($options['role']))){
@@ -270,22 +288,6 @@ class OrganizationType extends AbstractForm
                         'widget'   => 'choice',
                         'format' => 'dd/MM/yyyy',
                         'years' => range(date('Y') -10, date('Y')+5),
-                    ]
-                )
-                ->add(
-                    $builder,
-                    'building',
-                    ChoiceType::class,
-                    [
-                        'choices' => array_flip(GrandsVoisinsConfig::$buildingsSimple),
-                    ]
-                )
-                ->add(
-                    $builder,
-                    'room',
-                    TextType::class,
-                    [
-                        'required' => false,
                     ]
                 )
                 ->add(
