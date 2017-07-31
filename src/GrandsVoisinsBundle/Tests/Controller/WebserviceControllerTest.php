@@ -68,7 +68,7 @@ class WebserviceControllerTest extends toolsTest
 
     public function testWebserviceSearch(){
         $this->testLogin();
-        $this->crawler = $this->client->request('GET', '/webservice/search',['t' =>"givenName"]);
+        $this->crawler = $this->client->request('GET', '/webservice/search',['t' =>"label"]);
         self::assertTrue(
           $this->client->getResponse()->headers->contains(
             'Content-Type',
@@ -78,35 +78,29 @@ class WebserviceControllerTest extends toolsTest
         $jsonResponse = json_decode($this->client->getResponse()->getContent(),true);
         self::assertArrayHasKey('results', $jsonResponse);
         self::assertNotEmpty($jsonResponse);
+        self::assertNotEmpty($jsonResponse["results"]);
         $firstElem = $jsonResponse["results"][0];
         self::assertNotEmpty('results', $firstElem);
-        self::assertArrayHasKey('familyName', $firstElem);
-        self::assertArrayHasKey('givenName', $firstElem);
         self::assertArrayHasKey('title', $firstElem);
         self::assertArrayHasKey('type', $firstElem);
         self::assertArrayHasKey('uri', $firstElem);
-        self::assertEquals("givenName",$firstElem["givenName"]);
 
     }
 
     public function testWebserviceFieldUriSearch(){
         $this->testLogin();
-        $this->crawler = $this->client->request('GET', '/webservice/search/field-uri',['QueryString' =>"givenName",'rdfType' =>$this->entities[1]]);
-        self::assertTrue(
-          $this->client->getResponse()->headers->contains(
-            'Content-Type',
-            'application/json'
-          )
-        );
-        $jsonResponse = json_decode($this->client->getResponse()->getContent(),true);
+				$jsonResponse = $this->fieldUriSearch("label",$this->entities[2]);
+        dump($jsonResponse);
         self::assertNotEmpty($jsonResponse);
-        self::assertContains("givenName",reset($jsonResponse));
+        self::assertContains("label",reset($jsonResponse));
     }
 
     public function testWebserviceFieldUriLabel(){
         $this->testLogin();
-        $uri = $this->getUri();
-        $this->crawler = $this->client->request('GET', '/webservice/label/field-uri',['uri' =>$uri]);
+        $term = "label";
+				$jsonResponse = $this->fieldUriSearch($term,$this->entities[2]);
+
+        $this->crawler = $this->client->request('GET', '/webservice/label/field-uri',['uri' =>array_flip($jsonResponse)[$term]]);
         self::assertTrue(
           $this->client->getResponse()->headers->contains(
             'Content-Type',
@@ -114,9 +108,21 @@ class WebserviceControllerTest extends toolsTest
           )
         );
         $jsonResponse = json_decode($this->client->getResponse()->getContent(),true);
+        dump($jsonResponse);
         self::assertNotEmpty($jsonResponse);
-        self::assertContains("givenName",reset($jsonResponse));
+        self::assertContains($term,reset($jsonResponse));
     }
 
+    private function fieldUriSearch($term, $type){
+			$this->crawler = $this->client->request('GET', '/webservice/search/field-uri',['QueryString' =>$term,'rdfType' =>$type]);
+			self::assertTrue(
+				$this->client->getResponse()->headers->contains(
+					'Content-Type',
+					'application/json'
+				)
+			);
+			$jsonResponse = json_decode($this->client->getResponse()->getContent(),true);
+			return $jsonResponse;
+		}
 
 }
