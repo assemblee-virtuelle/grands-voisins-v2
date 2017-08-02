@@ -47,9 +47,6 @@ class GrandsVoisinsConfig
     CONST SPEC_EVENT = 'form-Event';
     CONST SPEC_PROPOSITION = 'form-Proposition';
     const PREFIX = 'urn:gv/contacts/new/row/';
-    const FIRST = 0;
-    const ORGANISATION = 1;
-    const TEAM = 2;
 
 
     // TODO Rename $fieldsAliasesOrganization
