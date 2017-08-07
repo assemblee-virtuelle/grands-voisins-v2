@@ -74,7 +74,8 @@ Polymer({
     }
 
     // Create inner depending of type.
-    let inner = document.createElement('mm-detail-' + gvc.entities[data.properties.type].nameType.toLowerCase());
+      log(gvc.entities[data.properties.type].nameType)
+    let inner = document.createElement('gv-detail-' + gvc.entities[data.properties.type].nameType.toLowerCase());
     this.child = inner;
     this.id = data.id;
     inner.data = data;

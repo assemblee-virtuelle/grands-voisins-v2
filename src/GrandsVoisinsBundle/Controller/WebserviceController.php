@@ -480,95 +480,22 @@ class WebserviceController extends Controller
                 );
                 if(!is_null($organization))
                     $output['id'] = $organization->getId();
-                if (isset($properties['head'])) {
-                    foreach ($properties['head'] as $uri) {
-                        //dump($person);
-                        $output['responsible'][] = $this->getData(
-                          $uri,
-                          GrandsVoisinsConfig::URI_FOAF_PERSON
-                        );
-                    }
-                }
-                $person = $orga = array();
-                if (isset($properties['hasMember'])) {
-                    foreach ($properties['hasMember'] as $uri) {
-                        //dump($person);
-                        $component = $this->uriPropertiesFiltered($uri);
-
-                        switch (current($component['type'])) {
-                            case GrandsVoisinsConfig::URI_FOAF_PERSON:
-                                $person[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_FOAF_ORGANIZATION:
-                                $orga[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                        }
-                    }
-                    $output['person_hasMember'] = $person;
-                    $output['orga_hasMember']   = $orga;
-                }
-                if (isset($properties['memberOf'])) {
-                    foreach ($properties['memberOf'] as $uri) {
-                        //dump($person);
-                        $output['memberOf'][] = $this->getData(
-                          $uri,
-                          GrandsVoisinsConfig::URI_MIXTE_PERSON_ORGANIZATION
-                        );
-                    }
-                }
-                if (isset($properties['OrganizationalCollaboration'])) {
-                    foreach ($properties['OrganizationalCollaboration'] as $uri) {
-                        //dump($person);
-                        $output['OrganizationalCollaboration'][] = $this->getData(
-                            $uri,
-                            GrandsVoisinsConfig::URI_FOAF_ORGANIZATION
-                        );
-                    }
-                }
-                if (isset($properties['topicInterest'])) {
-                    foreach ($properties['topicInterest'] as $uri) {
-                        $output['topicInterest'][] = [
-                          'uri'  => $uri,
-                          'name' => $sfClient->dbPediaLabel($uri),
-                        ];
-                    }
-                }
-                $projet = $event = $proposition = array();
-                if (isset($properties['made'])) {
-                    foreach ($properties['made'] as $uri) {
-                        $component = $this->uriPropertiesFiltered($uri);
-                        //dump($component);
-                        switch (current($component['type'])) {
-                            case GrandsVoisinsConfig::URI_FOAF_PROJECT:
-                                $projet[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_PURL_EVENT:
-                                $event[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_FIPA_PROPOSITION:
-                                $proposition[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                        }
-                    }
-                    $output['projet']      = $projet;
-                    $output['event']       = $event;
-                    $output['proposition'] = $proposition;
-                }
+								if (isset($properties['topicInterest'])) {
+										foreach ($properties['topicInterest'] as $uri) {
+												$output['topicInterest'][] = [
+													'uri'  => $uri,
+													'name' => $sfClient->dbPediaLabel($uri),
+												];
+										}
+								}
+								$propertiesWithUri =[
+									'head',
+									'hasMember',
+									'memberOf',
+									'OrganizationalCollaboration',
+									'made',
+								];
+								$this->getData2($properties,$propertiesWithUri,$output);
                 break;
             // Person.
             case  GrandsVoisinsConfig::URI_FOAF_PERSON:
@@ -593,92 +520,38 @@ class WebserviceController extends Controller
                       current($properties['phone'])
                     );
                 }
-                if (isset($properties['memberOf'])) {
-                    foreach ($properties['memberOf'] as $uri) {
-                        //dump($person);
-                        $output['memberOf'][] = $this->getData(
-                          $uri,
-                          GrandsVoisinsConfig::URI_FOAF_ORGANIZATION
-                        );
-                    }
-                }
-                if (isset($properties['currentProject'])) {
-                    foreach ($properties['currentProject'] as $uri) {
-                        $output['projects'][] = $this->getData(
-                          $uri,
-                          GrandsVoisinsConfig::URI_FOAF_PROJECT
-                        );
-                    }
-                }
-                if (isset($properties['topicInterest'])) {
-                    foreach ($properties['topicInterest'] as $uri) {
-                        $output['topicInterest'][] = [
-                          'uri'  => $uri,
-                          'name' => $sfClient->dbPediaLabel($uri),
-                        ];
-                    }
-                }
-                if (isset($properties['city'])) {
-                    foreach ($properties['city'] as $uri) {
-                        $output['city'] = [
-                          'uri'  => $uri,
-                          'name' => $sfClient->dbPediaLabel($uri),
-                        ];
-                    }
-                }
-                if (isset($properties['expertize'])) {
-                    foreach ($properties['expertize'] as $uri) {
-                        $output['expertize'][] = [
-                          'uri'  => $uri,
-                          'name' => $sfClient->dbPediaLabel($uri),
-                        ];
-                    }
-                }
-                if (isset($properties['knows'])) {
-                    foreach ($properties['knows'] as $uri) {
-                        //dump($person);
-                        $output['knows'][] = $this->getData(
-                          $uri,
-                          GrandsVoisinsConfig::URI_FOAF_PERSON
-                        );
-                    }
-                }
-                $projet = $event = $proposition = array();
-                if (isset($properties['made'])) {
-                    foreach ($properties['made'] as $uri) {
-                        $component = $this->uriPropertiesFiltered($uri);
-                        //dump($component);
-                        switch (current($component['type'])) {
-                            case GrandsVoisinsConfig::URI_FOAF_PROJECT:
-                                $projet[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_PURL_EVENT:
-                                $event[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_FIPA_PROPOSITION:
-                                $proposition[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                        }
-                    }
-                    $output['projet']      = $projet;
-                    $output['event']       = $event;
-                    $output['proposition'] = $proposition;
-                }
-
-                if (isset($properties['headOf'])) {
-                    $output['responsible'] = $this->uriPropertiesFiltered(
-                      current($properties['headOf'])
-                    );
-                }
+								if (isset($properties['topicInterest'])) {
+										foreach ($properties['topicInterest'] as $uri) {
+												$output['topicInterest'][] = [
+													'uri'  => $uri,
+													'name' => $sfClient->dbPediaLabel($uri),
+												];
+										}
+								}
+								if (isset($properties['expertize'])) {
+										foreach ($properties['expertize'] as $uri) {
+												$output['expertize'][] = [
+													'uri'  => $uri,
+													'name' => $sfClient->dbPediaLabel($uri),
+												];
+										}
+								}
+								if (isset($properties['city'])) {
+										foreach ($properties['city'] as $uri) {
+												$output['city'] = [
+													'uri'  => $uri,
+													'name' => $sfClient->dbPediaLabel($uri),
+												];
+										}
+								}
+								$propertiesWithUri =[
+									'memberOf',
+									//'currentProject',
+									'knows',
+									'made',
+									'headOf',
+								];
+								$this->getData2($properties,$propertiesWithUri,$output);
                 break;
             // Project.
             case GrandsVoisinsConfig::URI_FOAF_PROJECT:
@@ -689,59 +562,21 @@ class WebserviceController extends Controller
                       current($properties['mbox'])
                     );
                 }
-                $person = $orga = array();
-                if (isset($properties['maker'])) {
-                    foreach ($properties['maker'] as $uri) {
-                        $component = $this->uriPropertiesFiltered($uri);
-                        switch (current($component['type'])) {
-                            case GrandsVoisinsConfig::URI_FOAF_PERSON:
-                                $person[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_FOAF_ORGANIZATION:
-                                $orga[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                        }
-                    }
-                    $output['person_maker'] = $person;
-                    $output['orga_maker']   = $orga;
-                }
-                $person = $orga = array();
-                if (isset($properties['head'])) {
-                    foreach ($properties['head'] as $uri) {
-                        $component = $this->uriPropertiesFiltered($uri);
-                        //dump($component);
-                        switch (current($component['type'])) {
-                            case GrandsVoisinsConfig::URI_FOAF_PERSON:
-                                $person[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_FOAF_ORGANIZATION:
-                                $orga[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                        }
-                    }
-                    $output['person_head'] = $person;
-                    $output['orga_head']   = $orga;
-                }
-                if (isset($properties['topicInterest'])) {
-                    foreach ($properties['topicInterest'] as $uri) {
-                        $output['topicInterest'][] = [
-                          'uri'  => $uri,
-                          'name' => $sfClient->dbPediaLabel($uri),
-                        ];
-                    }
-                }
+								if (isset($properties['topicInterest'])) {
+										foreach ($properties['topicInterest'] as $uri) {
+												$output['topicInterest'][] = [
+													'uri'  => $uri,
+													'name' => $sfClient->dbPediaLabel($uri),
+												];
+										}
+								}
+								$propertiesWithUri =[
+									'maker',
+									'head',
+								];
+								$this->getData2($properties,$propertiesWithUri,$output);
+
+
                 break;
             // Event.
             case GrandsVoisinsConfig::URI_PURL_EVENT:
@@ -760,29 +595,11 @@ class WebserviceController extends Controller
                         ];
                     }
                 }
-                $person = $orga = array();
-                if (isset($properties['maker'])) {
-                    foreach ($properties['maker'] as $uri) {
-                        $component = $this->uriPropertiesFiltered($uri);
-                        //dump($component);
-                        switch (current($component['type'])) {
-                            case GrandsVoisinsConfig::URI_FOAF_PERSON:
-                                $person[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_FOAF_ORGANIZATION:
-                                $orga[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                        }
-                    }
-                    $output['person_maker'] = $person;
-                    $output['orga_maker']   = $orga;
-                }
+								$propertiesWithUri =[
+									'maker',
+								];
+								$this->getData2($properties,$propertiesWithUri,$output);
+
                 break;
             // Proposition.
             case GrandsVoisinsConfig::URI_FIPA_PROPOSITION:
@@ -801,29 +618,11 @@ class WebserviceController extends Controller
                         ];
                     }
                 }
-                $person = $orga = array();
-                if (isset($properties['maker'])) {
-                    foreach ($properties['maker'] as $uri) {
-                        $component = $this->uriPropertiesFiltered($uri);
-                        //dump($component);
-                        switch (current($component['type'])) {
-                            case GrandsVoisinsConfig::URI_FOAF_PERSON:
-                                $person[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                            case GrandsVoisinsConfig::URI_FOAF_ORGANIZATION:
-                                $orga[] = $this->getData(
-                                  $uri,
-                                  current($component['type'])
-                                );
-                                break;
-                        }
-                    }
-                    $output['person_maker'] = $person;
-                    $output['orga_maker']   = $orga;
-                }
+								$propertiesWithUri =[
+									'maker',
+								];
+								$this->getData2($properties,$propertiesWithUri,$output);
+
                 break;
         }
         if (isset($properties['resourceProposed'])) {
@@ -902,6 +701,64 @@ class WebserviceController extends Controller
                 break;
         }
     }
+
+		private function getData2($properties,$tabFieldsAlias,&$output){
+				$cacheTemp = [];
+				foreach ($tabFieldsAlias as $alias) {
+						if (isset($properties[$alias])) {
+								foreach ($properties[$alias] as $uri) {
+										if (array_key_exists($uri, $cacheTemp)) {
+												$output[$alias][$this->entitiesTabs[$cacheTemp[$uri]['type']]['nameType']][] = $cacheTemp[$uri];
+										} else {
+												$component = $this->uriPropertiesFiltered($uri);
+												$componentType = current($component['type']);
+												$result = null;
+												switch ($componentType) {
+														case GrandsVoisinsConfig::URI_FOAF_PERSON:
+																$result = [
+																	'uri' => $uri,
+																	'name' => ((current($component['givenName'])) ? current($component['givenName']) : "") . " " . ((array_key_exists('familyName',$component) && current($component['familyName'])) ? current($component['familyName']) : ""),
+																	'image' => (!isset($component['image'])) ? '/common/images/no_avatar.jpg' : $component['image'],
+																];
+																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
+																break;
+														case GrandsVoisinsConfig::URI_FOAF_ORGANIZATION:
+
+																$result = [
+																	'uri' => $uri,
+																	'name' => ((current($component['foafName'])) ? current($component['foafName']) : ""),
+																	'image' => (!isset($component['image'])) ? '/common/images/no_avatar.jpg' : $component['image'],
+																];
+																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
+
+														break;
+														case GrandsVoisinsConfig::URI_PURL_EVENT:
+														case GrandsVoisinsConfig::URI_FOAF_PROJECT:
+														case GrandsVoisinsConfig::URI_FIPA_PROPOSITION:
+														sort($component['displayLabel']);
+																$result = [
+																	'uri' => $uri,
+																	'name' => ((end($component['displayLabel'])) ? end($component['displayLabel']) : "") ,
+																	'image' => (!isset($component['image'])) ? '/common/images/no_avatar.jpg' : $component['image'],
+																];
+																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
+																break;
+														case GrandsVoisinsConfig::URI_SKOS_THESAURUS:
+																$result = [
+																	'uri' => $uri,
+																	'name' => ((current($component['thesaurus'])) ? current($component['thesaurus']) : "") ,
+																];
+																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
+
+														break;
+												}
+												$cacheTemp[$uri] = $result;
+												$cacheTemp[$uri]['type'] = $componentType;
+										}
+								}
+						}
+				}
+		}
 
     /**
      * Filter only allowed types.

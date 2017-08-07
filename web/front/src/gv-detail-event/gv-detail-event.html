@@ -79,20 +79,20 @@
         </div>
       </div>
       <div class="col col-sm-4 side-blocks">
-        <template is="dom-if" if="[[data.orga_maker.length]]">
+        <template is="dom-if" if="[[data.maker.organization.length]]">
           <h3>Structure(s) organisatrice(s)</h3>
           <div class="thumbs">
-            <template is="dom-repeat" items="{{data.orga_maker}}">
+            <template is="dom-repeat" items="{{data.maker.organization}}">
               <gv-avatar image="[[item.image]]" uri="[[item.uri]]"
                          label="[[item.name]]"></gv-avatar>
             </template>
           </div>
           <div class="clearfix"></div>
         </template>
-        <template is="dom-if" if="[[data.person_maker.length]]">
+        <template is="dom-if" if="[[data.maker.person.length]]">
           <h3>Contributeurs</h3>
           <div class="thumbs">
-            <template is="dom-repeat" items="{{data.person_maker}}">
+            <template is="dom-repeat" items="{{data.maker.person}}">
               <gv-avatar image="[[item.image]]" uri="[[item.uri]]"
                          label="[[item.name]]"></gv-avatar>
             </template>

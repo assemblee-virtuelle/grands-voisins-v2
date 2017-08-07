@@ -18,6 +18,7 @@ Polymer({
       this.topicInterest = this.data.topicInterest;
       this.resourceNeeded = this.data.resourceNeeded;
       this.resourceProposed = this.data.resourceProposed;
+      //this.maker = this.data.maker;
       this.buildingTitle = gvc.buildings[this.data.properties.building].title;
       this.image = this.data.properties.image;
   },

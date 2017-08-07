@@ -17,14 +17,11 @@ Polymer({
     this.resourceNeeded = this.data.resourceNeeded;
     this.resourceProposed = this.data.resourceProposed;
     this.topicInterest = this.data.topicInterest;
-    this.person_hasMember = this.data.person_hasMember;
-    this.orga_hasMember = this.data.orga_hasMember;
+    this.hasMember = this.data.hasMember;
     this.OrganizationalCollaboration = this.data.OrganizationalCollaboration;
     this.thesaurus = this.data.thesaurus;
-    this.projet = this.data.projet;
-    this.event = this.data.event;
-    this.proposition = this.data.proposition;
-    this.responsible = this.data.responsible;
+    this.made = this.data.made;
+    this.head = this.data.head;
     this.memberOf = this.data.memberOf;
     // Computed values.
     this.title = this.data.properties.foafName;

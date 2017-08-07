@@ -89,29 +89,30 @@
       </div>
       <div class="col col-sm-4 side-blocks">
 
-        <template is="dom-if" if="[[knows.length]]">
+        <template is="dom-if" if="[[knows.person.length]]">
           <h3>Ses ami(e)s aux Grands Voisins</h3>
           <div class="thumbs">
-            <template is="dom-repeat" items="{{knows}}">
+            <template is="dom-repeat" items="{{knows.person}}">
               <gv-avatar image="[[item.image]]" uri="[[item.uri]]" label="[[item.name]]"></gv-avatar>
             </template>
           </div>
           <div class="clearfix"></div>
         </template>
 
-        <template is="dom-if" if="[[data.responsible]]">
+        <template is="dom-if" if="[[data.headOf.organization.length]]">
           <h3>Exerce des responsabilités chez</h3>
           <div class="thumbs">
-            <gv-avatar image="[[data.responsible.image]]" uri="[[data.responsible.uri]]" label="[[data.responsible.foafName]]"></gv-avatar>
-          </a>
+            <template is="dom-repeat" items="{{headOf.organization}}">
+              <gv-avatar image="[[item.image]]" uri="[[item.uri]]" label="[[item.name]]"></gv-avatar>
+            </template>
           </div>
           <div class="clearfix"></div>
         </template>
 
-        <template is="dom-if" if="[[data.memberOf.length]]">
+        <template is="dom-if" if="[[data.memberOf.organization.length]]">
           <h3>Est membre de</h3>
           <div class="thumbs">
-            <template is="dom-repeat" items="{{data.memberOf}}">
+            <template is="dom-repeat" items="{{data.memberOf.organization}}">
               <gv-avatar image="[[item.image]]" uri="[[item.uri]]" label="[[item.name]]"></gv-avatar>
             </template>
           </div>
@@ -148,9 +149,9 @@
           </div>
         </template>
 
-        <template is="dom-if" if="[[data.projet.length]]">
+        <template is="dom-if" if="[[data.made.projet.length]]">
           <h3>Les projets dans lesquels il/elle est impliqué(e)</h3>
-          <template is="dom-repeat" items="{{data.projet}}">
+          <template is="dom-repeat" items="{{data.made.projet}}">
             <a href="#" rel="{{item.uri}}" on-click="handleClickDetail"
                class="list-item">
               <span class="glyphicon glyphicon-chevron-right"></span>{{item.name}}</a>
@@ -158,9 +159,9 @@
           <div class="clearfix"></div>
         </template>
 
-        <template is="dom-if" if="[[data.event.length]]">
+        <template is="dom-if" if="[[data.made.event.length]]">
           <h3>Les événements dans lesquels il/elle est impliqué(e)</h3>
-          <template is="dom-repeat" items="{{data.event}}">
+          <template is="dom-repeat" items="{{data.made.event}}">
             <a href="#" rel="{{item.uri}}" on-click="handleClickDetail"
                class="list-item">
               <span class="glyphicon glyphicon-chevron-right"></span>{{item.name}}</a>
@@ -168,9 +169,9 @@
           <div class="clearfix"></div>
         </template>
 
-        <template is="dom-if" if="[[data.proposition.length]]">
+        <template is="dom-if" if="[[data.made.proposition.length]]">
           <h3>Ses propositions</h3>
-          <template is="dom-repeat" items="{{data.proposition}}">
+          <template is="dom-repeat" items="{{data.made.proposition}}">
             <a href="#" rel="{{item.uri}}" on-click="handleClickDetail"
                class="list-item">
               <span class="glyphicon glyphicon-chevron-right"></span>{{item.name}}</a>

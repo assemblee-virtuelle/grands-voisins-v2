@@ -8,6 +8,7 @@ Polymer({
     // Raw values.
     $.extend(this, this.data.properties);
     this.memberOf = this.data.memberOf;
+    this.headOf = this.data.headOf;
     this.topicInterest = this.data.topicInterest;
     this.resourceNeeded = this.data.resourceNeeded;
     this.resourceProposed = this.data.resourceProposed;

@@ -20,6 +20,8 @@ Polymer({
     this.resourceProposed = this.data.resourceProposed;
     this.topicInterest = this.data.topicInterest;
     this.image = this.data.properties.image;
+    this.maker = this.data.properties.maker;
+    this.head = this.data.properties.head;
     if (this.projectStart) {
       let projectStart = new Date(this.projectStart);
       this.projectStart = projectStart.getDate() + '/' + (projectStart.getMonth() + 1) + '/' + projectStart.getFullYear();
