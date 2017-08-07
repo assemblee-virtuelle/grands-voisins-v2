@@ -20,33 +20,13 @@
       this.buildingSelectedAll = 'partout';
       this.buildingSelected = this.buildingSelectedAll;
       this.$gvMap = $(document.getElementById('gv-map'));
-      this.searchTypes = {
-        "http://xmlns.com/foaf/0.1/Person": {
-          label: 'Personne',
-          type: 'person',
-          plural: 'Personnes'
-        },
-        "http://xmlns.com/foaf/0.1/Organization": {
-          label: 'Organisation',
-          type: 'organization',
-          plural: 'Organisations'
-        },
-        "http://xmlns.com/foaf/0.1/Project": {
-          label: 'Projet',
-          type: 'projet',
-          plural: 'Projets'
-        },
-        "http://purl.org/NET/c4dm/event.owl#Event": {
-          label: 'Evénement',
-          type: 'event',
-          plural: 'Evénements'
-        },
-        "http://www.fipa.org/schemas#Proposition": {
-          label: 'Proposition',
-          type: 'proposition',
-          plural: 'Propositions'
-        }
-      };
+      this.allowedType = [
+        "http://xmlns.com/foaf/0.1/Person",
+        "http://xmlns.com/foaf/0.1/Organization",
+        "http://xmlns.com/foaf/0.1/Project",
+        "http://purl.org/NET/c4dm/event.owl#Event",
+        "http://www.fipa.org/schemas#Proposition",
+    ];
 
       // Play intro only once.
       if (cookie.get('introAnimation')) {
@@ -183,7 +163,7 @@
     imageOrFallback(path, typeUri) {
       "use strict";
       if (!path) {
-        return '/common/images/result-no_picture-' + gvc.searchTypes[typeUri].type + '.png';
+        return '/common/images/result-no_picture-' + gvc.entities[typeUri].nameType + '.png';
       }
       return path;
     }

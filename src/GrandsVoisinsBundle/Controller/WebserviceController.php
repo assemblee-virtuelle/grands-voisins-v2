@@ -19,26 +19,31 @@ class WebserviceController extends Controller
         'name'   => 'Organisation',
         'plural' => 'Organisations',
         'icon'   => 'tower',
+				'nameType' => 'organization'
       ],
       GrandsVoisinsConfig::URI_FOAF_PERSON       => [
         'name'   => 'Personne',
         'plural' => 'Personnes',
         'icon'   => 'user',
+				'nameType' => 'person'
       ],
       GrandsVoisinsConfig::URI_FOAF_PROJECT      => [
         'name'   => 'Projet',
         'plural' => 'Projets',
         'icon'   => 'screenshot',
+				'nameType' => 'projet'
       ],
       GrandsVoisinsConfig::URI_PURL_EVENT        => [
         'name'   => 'Event',
         'plural' => 'Events',
         'icon'   => 'calendar',
+				'nameType' => 'event'
       ],
       GrandsVoisinsConfig::URI_FIPA_PROPOSITION  => [
         'name'   => 'Proposition',
         'plural' => 'Propositions',
         'icon'   => 'info-sign',
+				'nameType' => 'proposition'
       ],
     ];
 

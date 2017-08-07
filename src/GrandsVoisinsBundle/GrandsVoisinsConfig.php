@@ -9,9 +9,6 @@
 namespace GrandsVoisinsBundle;
 
 
-use GrandsVoisinsBundle\Entity\Organisation;
-use GrandsVoisinsBundle\Entity\User;
-
 class GrandsVoisinsConfig
 {
     const URI_FOAF_PERSON = 'http://xmlns.com/foaf/0.1/Person';
