@@ -57,6 +57,7 @@ class AdminController extends Controller
 					ChoiceType::class,array(
 						'mapped'  => false,
 						'placeholder' => 'choisir une organisation',
+						'data' => '',
 						'choices' => array_flip($tabOrga)
 					)
 				);
