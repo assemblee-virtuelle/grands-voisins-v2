@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+
+    phpmyadmin:
+        # Avoid to type login / password on local
+        environment:
+          - PMA_USER=root
+          - PMA_PASSWORD=${HOST_MYSQL_PASSWORD}
