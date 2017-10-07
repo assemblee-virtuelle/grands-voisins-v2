@@ -143,20 +143,24 @@ class WebserviceController extends Controller
         $sparql->addWhere('?uri','rdf:type', '?type','?GR')
             ->groupBy('?uri ?type ?title ?image ?desc ?building')
             ->orderBy($sparql::ORDER_ASC,'?title');
-        $organizations =[];
+        $organizations =[]; echo $type;
         if($type == GrandsVoisinsConfig::Multiple || $typeOrganization ){
             $orgaSparql = clone $sparql;
+
             $orgaSparql->addSelect('?title')
                 ->addWhere('?uri','rdf:type', $sparql->formatValue(GrandsVoisinsConfig::URI_FOAF_ORGANIZATION,$sparql::VALUE_TYPE_URL),'?GR')
                 ->addWhere('?uri','foaf:name','?title','?GR')
                 ->addOptional('?uri','foaf:img','?image','?GR')
                 ->addOptional('?uri','foaf:status','?desc','?GR')
                 ->addOptional('?uri','gvoi:building','?building','?GR');
+
             if($term)$orgaSparql->addFilter('contains( lcase(?title) , lcase("'.$term.'")) || contains( lcase(?desc)  , lcase("'.$term.'")) ');
             //dump($orgaSparql->getQuery());
             $results = $sfClient->sparql($orgaSparql->getQuery());
             $organizations = $sfClient->sparqlResultsValues($results);
+            echo $orgaSparql->getQuery(); exit;
         }
+
         $persons = [];
         if($type == GrandsVoisinsConfig::Multiple || $typePerson ){
 
