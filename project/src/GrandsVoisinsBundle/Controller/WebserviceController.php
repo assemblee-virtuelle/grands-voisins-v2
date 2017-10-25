@@ -553,6 +553,8 @@ class WebserviceController extends Controller
 									'memberOf',
 									'OrganizationalCollaboration',
 									'made',
+									'documentedBy',
+
 								];
 								$this->getData2($properties,$propertiesWithUri,$output);
                 break;
@@ -632,6 +634,8 @@ class WebserviceController extends Controller
 								$propertiesWithUri =[
 									'maker',
 									'head',
+									'documentedBy',
+
 								];
 								$this->getData2($properties,$propertiesWithUri,$output);
 
@@ -656,6 +660,7 @@ class WebserviceController extends Controller
                 }
 								$propertiesWithUri =[
 									'maker',
+									'documentedBy',
 								];
 								$this->getData2($properties,$propertiesWithUri,$output);
 
@@ -679,6 +684,8 @@ class WebserviceController extends Controller
                 }
 								$propertiesWithUri =[
 									'maker',
+									'documentedBy',
+
 								];
 								$this->getData2($properties,$propertiesWithUri,$output);
 
@@ -724,12 +731,7 @@ class WebserviceController extends Controller
             }
         }
         if (isset($properties['thesaurus'])) {
-            foreach ($properties['thesaurus'] as $uri) {
-                $output['thesaurus'][] = $this->getData(
-                  $uri,
-                  GrandsVoisinsConfig::URI_SKOS_THESAURUS
-                );
-            }
+						$output['thesaurus'][] = $this->getData2($properties,['thesaurus'],$output);
         }
         if (isset($properties['description'])) {
             $properties['description'] = nl2br(current($properties['description']),false);
@@ -739,49 +741,6 @@ class WebserviceController extends Controller
         //dump($output);
         return $output;
 
-    }
-
-    private function getData($uri, $type =null)
-    {
-
-        switch ($type) {
-            case GrandsVoisinsConfig::URI_FOAF_PERSON:
-            case GrandsVoisinsConfig::URI_FOAF_ORGANIZATION:
-                $temp = $this->uriPropertiesFiltered($uri);
-
-                return [
-                  'uri'   => $uri,
-                  'name'  => $this->sparqlGetLabel(
-                    $uri,
-                    $type
-                  ),
-                  'image' => (!isset($temp['image'])) ? '/common/images/no_avatar.jpg' : $temp['image'],
-                ];
-                break;
-            case GrandsVoisinsConfig::URI_FOAF_PROJECT:
-            case GrandsVoisinsConfig::URI_PURL_EVENT:
-            case GrandsVoisinsConfig::URI_FIPA_PROPOSITION:
-            case GrandsVoisinsConfig::URI_SKOS_THESAURUS:
-                return [
-                  'uri'  => $uri,
-                  'name' => $this->sparqlGetLabel(
-                    $uri,
-                    $type
-                  ),
-                ];
-                break;
-            default:
-                $temp = $this->uriPropertiesFiltered($uri);
-                return [
-                  'uri'   => $uri,
-                  'name'  => $this->sparqlGetLabel(
-                    $uri,
-                    $type
-                  ),
-                  'image' => (!isset($temp['image'])) ? '/common/images/no_avatar.jpg' : $temp['image'],
-                ];
-                break;
-        }
     }
 
 		private function getData2($properties,$tabFieldsAlias,&$output){
@@ -828,9 +787,9 @@ class WebserviceController extends Controller
 														case GrandsVoisinsConfig::URI_SKOS_THESAURUS:
 																$result = [
 																	'uri' => $uri,
-																	'name' => ((current($component['thesaurus'])) ? current($component['thesaurus']) : "") ,
+																	'name' => ((current($component['displayLabel'])) ? current($component['displayLabel']) : "") ,
 																];
-																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
+																$output[$alias]['thesaurus'][] = $result;
 														break;
 														case GrandsVoisinsConfig::URI_PAIR_DOCUMENT:
 														case GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE:
