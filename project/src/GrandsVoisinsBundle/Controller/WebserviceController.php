@@ -45,6 +45,16 @@ class WebserviceController extends Controller
         'icon'   => 'info-sign',
 				'nameType' => 'proposition'
       ],
+			GrandsVoisinsConfig::URI_PAIR_DOCUMENT  => [
+				'name'   => 'Document',
+				'plural' => 'Documents',
+				'icon'   => 'folder-open',
+			],
+			GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE  => [
+				'name'   => 'Type de document',
+				'plural' => 'Types de document',
+				'icon'   => 'pushpin',
+			],
     ];
 
     var $entitiesFilters = [
@@ -54,6 +64,8 @@ class WebserviceController extends Controller
       GrandsVoisinsConfig::URI_PURL_EVENT,
       GrandsVoisinsConfig::URI_FIPA_PROPOSITION,
       GrandsVoisinsConfig::URI_SKOS_THESAURUS,
+			GrandsVoisinsConfig::URI_PAIR_DOCUMENT,
+			GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE,
     ];
 
     public function __construct()
@@ -127,12 +139,16 @@ class WebserviceController extends Controller
         $typeEvent= array_key_exists(GrandsVoisinsConfig::URI_PURL_EVENT,$arrayType);
         $typeProposition= array_key_exists(GrandsVoisinsConfig::URI_FIPA_PROPOSITION,$arrayType);
         $typeThesaurus= array_key_exists(GrandsVoisinsConfig::URI_SKOS_THESAURUS,$arrayType);
-        $userLogged =  $this->getUser() != null;
+				$typeDocument= array_key_exists(GrandsVoisinsConfig::URI_PAIR_DOCUMENT,$arrayType);
+				$typeDocumentType= array_key_exists(GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE,$arrayType);
+
+				$userLogged =  $this->getUser() != null;
         $sparqlClient = new SparqlClient();
         /** @var \VirtualAssembly\SparqlBundle\Sparql\sparqlSelect $sparql */
         $sparql = $sparqlClient->newQuery(SparqlClient::SPARQL_SELECT);
         /* requete génériques */
         $sparql->addPrefixes($sparql->prefixes)
+					->addPrefix('default','http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#')
             ->addSelect('?uri')
             ->addSelect('?type')
             ->addSelect('?image')
@@ -241,30 +257,59 @@ class WebserviceController extends Controller
             $results = $sfClient->sparql($thematiqueSparql->getQuery());
             $thematiques = $sfClient->sparqlResultsValues($results);
         }
-
+				$documents = [];
+				if(($type == GrandsVoisinsConfig::Multiple || $typeDocument)&& $userLogged ){
+						$documentSparql = clone $sparql;
+						$documentSparql->addSelect('?title')
+							->addWhere('?uri','rdf:type', $sparql->formatValue(GrandsVoisinsConfig::URI_PAIR_DOCUMENT,$sparql::VALUE_TYPE_URL),'?GR')
+							->addWhere('?uri','default:preferedLabel','?title','?GR')
+							->addOptional('?uri','default:comment','?desc','?GR');
+						//$documentSparql->addOptional('?uri','default:building','?building','?GR');
+						if($term)$documentSparql->addFilter('contains( lcase(?title)  , lcase("'.$term.'")) || contains( lcase(?desc)  , lcase("'.$term.'")) ');
+						$results = $sfClient->sparql($documentSparql->getQuery());
+						$documents= $sfClient->sparqlResultsValues($results);
+				}
+				$documentTypes = [];
+				if(($type == GrandsVoisinsConfig::Multiple || $typeDocumentType)&& $userLogged ){
+						$documentTypeSparql = clone $sparql;
+						$documentTypeSparql->addSelect('?title')
+							->addWhere('?uri','rdf:type', $sparql->formatValue(GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE,$sparql::VALUE_TYPE_URL),'?GR')
+							->addWhere('?uri','default:preferedLabel','?title','?GR')
+							->addOptional('?uri','default:comment','?desc','?GR');
+						//$documentTypeSparql->addOptional('?uri','default:building','?building','?GR');
+						if($term)$documentTypeSparql->addFilter('contains( lcase(?title)  , lcase("'.$term.'")) || contains( lcase(?desc)  , lcase("'.$term.'")) ');
+						$results = $sfClient->sparql($documentTypeSparql->getQuery());
+						$documentTypes = $sfClient->sparqlResultsValues($results);
+				}
         $results = [];
 
         while ($organizations || $persons || $projects
-          || $events || $propositions || $thematiques) {
+          || $events || $propositions || $thematiques || $documents || $documentTypes) {
 
-            if (!empty($organizations)) {
+						if (!empty($organizations)) {
                 $results[] = array_shift($organizations);
             }
-            if (!empty($persons)) {
+						else if (!empty($persons)) {
                 $results[] = array_shift($persons);
             }
-            if (!empty($projects)) {
+						else if (!empty($projects)) {
                 $results[] = array_shift($projects);
             }
-            if (!empty($events)) {
+						else if (!empty($events)) {
                 $results[] = array_shift($events);
             }
-            if (!empty($propositions)) {
+						else if (!empty($propositions)) {
                 $results[] = array_shift($propositions);
             }
-            if (!empty($thematiques)) {
+						else if (!empty($thematiques)) {
                 $results[] = array_shift($thematiques);
             }
+						else if (!empty($documents)) {
+								$results[] = array_shift($documents);
+						}
+						else if  (!empty($documentTypes)) {
+								$results[] = array_shift($documentTypes);
+						}
         }
 
         return $results;
@@ -303,6 +348,7 @@ class WebserviceController extends Controller
         /** @var \VirtualAssembly\SparqlBundle\Sparql\sparqlSelect $sparql */
         $sparql = $sparqlClient->newQuery(SparqlClient::SPARQL_SELECT);
         $sparql->addPrefixes($sparql->prefixes)
+					->addPrefix('default','http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#')
             ->addSelect('?uri')
             ->addFilter('?uri = <'.$url.'>');
 
@@ -329,7 +375,12 @@ class WebserviceController extends Controller
                 $sparql->addSelect('?label')
                     ->addWhere('?uri','skos:prefLabel','?label','?gr');
                 break;
-            default:
+						case GrandsVoisinsConfig::URI_PAIR_DOCUMENT :
+						case GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE :
+								$sparql->addSelect('?label')
+									->addWhere('?uri','default:preferedLabel','?label','?gr');
+								break;
+						default:
                 $sparql->addSelect('( COALESCE(?givenName, "") As ?result_1)')
                     ->addSelect('( COALESCE(?familyName, "") As ?result_2)')
                     ->addSelect('( COALESCE(?name, "") As ?result_3)')
@@ -394,6 +445,7 @@ class WebserviceController extends Controller
         /** @var \VirtualAssembly\SparqlBundle\Sparql\sparqlSelect $sparql */
         $sparql = $sparqlClient->newQuery(SparqlClient::SPARQL_SELECT);
         $sparql->addPrefixes($sparql->prefixes)
+					->addPrefix('default','http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#')
             ->addSelect('?type')
             ->addSelect('?uri')
             ->addSelect('( COALESCE(?givenName, "") As ?result_1)')

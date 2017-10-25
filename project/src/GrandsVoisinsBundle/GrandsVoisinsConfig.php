@@ -17,10 +17,23 @@ class GrandsVoisinsConfig
     const URI_PURL_EVENT = 'http://purl.org/NET/c4dm/event.owl#Event';
     const URI_FIPA_PROPOSITION = 'http://www.fipa.org/schemas#Proposition';
     const URI_SKOS_THESAURUS = 'http://www.w3.org/2004/02/skos/core#Concept';
-    const URI_MIXTE_PERSON_ORGANIZATION = [
+		const URI_PAIR_DOCUMENT = 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#Document';
+		const URI_PAIR_DOCUMENT_TYPE = 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#DocumentType';
+
+		const URI_MIXTE_PERSON_ORGANIZATION = [
       'http://xmlns.com/foaf/0.1/Person',
       'http://xmlns.com/foaf/0.1/Organization'
     ];
+
+		const URI_ALL_EXCEPT_DOC_TYPE = [
+			self::URI_FOAF_ORGANIZATION,
+			self::URI_FOAF_PROJECT,
+			self::URI_PURL_EVENT,
+			self::URI_FIPA_PROPOSITION,
+			self::URI_PAIR_DOCUMENT,
+
+		];
+
     const Multiple = '';
 
     const REVERSE = [
@@ -37,12 +50,19 @@ class GrandsVoisinsConfig
       GrandsVoisinsConfig::URI_PURL_EVENT => [
         'http://xmlns.com/foaf/0.1/maker' => 'http://xmlns.com/foaf/0.1/made',
       ],
+			GrandsVoisinsConfig::URI_PAIR_DOCUMENT => [
+				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#references' => 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#referencesBy',
+				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#hasType' => 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#typeOf',
+				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents' => 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy'
+			],
     ];
     CONST SPEC_PERSON = 'form-Person';
     CONST SPEC_ORGANIZATION = 'form-Organization';
     CONST SPEC_PROJECT = 'form-Project';
     CONST SPEC_EVENT = 'form-Event';
     CONST SPEC_PROPOSITION = 'form-Proposition';
+		CONST SPEC_DOCUMENT = 'form-Document';
+		CONST SPEC_DOCUMENTTYPE = 'form-DocumentType';
     const PREFIX = 'urn:gv/contacts/new/row/';
 
 

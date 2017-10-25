@@ -1,6 +1,7 @@
 /app/config/parameters.yml
 /build/
 /phpunit.xml
+phpunit.phar
 /var/*
 !/var/cache
 /var/cache/*
@@ -19,7 +20,7 @@ composer.phar
 /.idea/
 web/bower_components/
 web/data
-node_modules
 web/cookie.txt
 /web/uploads/
 /web/fake_service
+/node_modules/

@@ -13,7 +13,13 @@ class ComponentController extends Controller
     var $componentName = 'undefined';
     var $pluralName = 'undefined';
     var $sparqlPrefix = 'undefined';
-
+		private $route = [
+			'project' => 'projet',
+			'event' => 'evenement',
+			'proposition' => 'proposition',
+			'document' => 'document',
+			'documenttype' => 'documentType',
+		];
     public function listAction()
     {
         /** @var  $sfClient \VirtualAssembly\SemanticFormsBundle\Services\SemanticFormsClient  */
@@ -32,9 +38,11 @@ class ComponentController extends Controller
         $sparql = $sparqlClient->newQuery($sparqlClient::SPARQL_SELECT);
         $graphURI = $sparql->formatValue($organisation->getGraphURI(),$sparql::VALUE_TYPE_URL);
         $sparql->addPrefixes($sparql->prefixes)
+					->addPrefix('default', 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#')
             ->addSelect('?URI ?NAME')
             ->addWhere('?URI','rdf:type',$this->sparqlPrefix,$graphURI)
-            ->addWhere('?URI','rdfs:label','?NAME',$graphURI);
+            ->addOptional('?URI','rdfs:label','?NAME',$graphURI)
+        		->addOptional('?URI','default:preferedLabel','?NAME',$graphURI);
         $results = $sfClient->sparql($sparql->getQuery());
 
         $listContent = [];
@@ -111,7 +119,7 @@ class ComponentController extends Controller
               strtolower($request->get('component')).'List'
             );
         }
-        $image = $form->get('image')->getData();
+        $image = ($form->has('image'))? $form->get('image')->getData() : null;
         // Fill form
         return $this->render(
           'GrandsVoisinsBundle:Component:'.$this->componentName.'Form.html.twig',
@@ -122,26 +130,23 @@ class ComponentController extends Controller
         );
     }
     public function removeAction(){
-
-        $route = [
-          'project' => 'projet',
-          'event' => 'evenement',
-          'proposition' => 'proposition',
-          ];
         /** @var  $sfClient \VirtualAssembly\SemanticFormsBundle\Services\SemanticFormsClient  */
         $sfClient = $this->container->get('semantic_forms.client');
         /** @var \VirtualAssembly\SparqlBundle\Services\SparqlClient $sparqlClient */
         $sparqlClient   = $this->container->get('sparqlbundle.client');
         $componentName = $_GET['componentName'];
         $sparql = $sparqlClient->newQuery($sparqlClient::SPARQL_DELETE);
+				$sparqlDeux = clone $sparql;
         $uri = $sparql->formatValue($_GET['uri'],$sparql::VALUE_TYPE_URL);
+
         $sparql->addDelete($uri,'?P','?O','?gr')
-            ->addDelete('?s','?PP',$uri,'?gr')
-            ->addWhere($uri,'?P','?O','?gr')
-            ->addWhere('?s','?PP',$uri,'?gr');
+            ->addWhere($uri,'?P','?O','?gr');
+				$sparqlDeux->addDelete('?s','?PP',$uri,'?gr')
+					->addWhere('?s','?PP',$uri,'?gr');
 
         $sfClient->update($sparql->getQuery());
+        $sfClient->update($sparqlDeux->getQuery());
 
-        return $this->redirect('/mon-compte/'.$route[$componentName]);
+        return $this->redirect('/mon-compte/'.$this->route[$componentName]);
     }
 }
