@@ -17,6 +17,11 @@
 
 {% block pageContent %}
     {{ parent() }}
+    {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
+        <div class="alert alert-info fade in">
+            <b>Info super admin :</b> les champs en vert sont des champs que seul les super admis peuvent voir
+        </div>
+    {% endif %}
     <div class="container">
         {% if entityUri %}
             <ul class="nav nav-tabs">
@@ -52,10 +57,10 @@
 
                 {% if form.arrivalDate is defined  %}
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 has-success">
                         {{ form_row(form.arrivalDate) }}
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 has-success">
                         {{ form_row(form.status) }}
                     </div>
                 </div>
@@ -63,10 +68,10 @@
 
                 {% if form.arrivalDate is defined  %}
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-6 has-success">
                             {{ form_row(form.arrivalNumber) }}
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-6 has-success">
                             {{ form_row(form.insuranceStatus) }}
                         </div>
                     </div>
@@ -190,20 +195,12 @@
                     </div>
                 </div>
 
-                {% if form.haveBenefitOf is defined  %}
-                <div class="row">
-                    <div class="col-xs-12">
-                        {#{{ form_row(form.haveBenefitOf) }}#}
-                    </div>
-                </div>
-                {% endif %}
-
                 {% if form.leavingDate is defined  %}
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 has-success" >
                         {{ form_row(form.leavingDate) }}
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 has-success">
                         {{ form_row(form.newLocation) }}
                     </div>
                 </div>
