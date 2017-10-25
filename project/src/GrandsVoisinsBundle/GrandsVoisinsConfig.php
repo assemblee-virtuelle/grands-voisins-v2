@@ -39,16 +39,23 @@ class GrandsVoisinsConfig
     const REVERSE = [
       GrandsVoisinsConfig::URI_FOAF_ORGANIZATION =>[// person => orga
         'http://www.w3.org/ns/org#hasMember' => 'http://www.w3.org/ns/org#memberOf',
-      ],
+				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' =>'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents',
+
+			],
       GrandsVoisinsConfig::URI_FOAF_PROJECT => [
         'http://www.w3.org/ns/org#Head' => 'http://xmlns.com/foaf/0.1/made',
         'http://xmlns.com/foaf/0.1/maker' => 'http://xmlns.com/foaf/0.1/made',
-      ],
+				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' =>'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents',
+
+			],
       GrandsVoisinsConfig::URI_FIPA_PROPOSITION => [
         'http://xmlns.com/foaf/0.1/maker' => 'http://xmlns.com/foaf/0.1/made',
-      ],
+				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' =>'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents',
+
+			],
       GrandsVoisinsConfig::URI_PURL_EVENT => [
         'http://xmlns.com/foaf/0.1/maker' => 'http://xmlns.com/foaf/0.1/made',
+				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' =>'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents',
       ],
 			GrandsVoisinsConfig::URI_PAIR_DOCUMENT => [
 				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#references' => 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#referencesBy',

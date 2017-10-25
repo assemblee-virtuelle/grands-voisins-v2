@@ -24,6 +24,8 @@ class DocumentType extends AbstractForm
 			'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#references' 				=> 'references', # sf (doc)
 			'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#hasType' 						=> 'hasType', # sf (docType)
 			'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'                               => 'type',
+			'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus'        => 'thesaurus',
+
 		];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -97,6 +99,17 @@ class DocumentType extends AbstractForm
 							'lookupUrl' => $options['lookupUrlPerson'],
 							'labelUrl'  => $options['lookupUrlLabel'],
 							'rdfType'   => GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE,
+						]
+					)
+					->add(
+						$builder,
+						'thesaurus',
+						UriType::class,
+						[
+							'required'  => false,
+							'lookupUrl' => $options['lookupUrlPerson'],
+							'labelUrl'  => $options['lookupUrlLabel'],
+							'rdfType'   => GrandsVoisinsConfig::URI_SKOS_THESAURUS,
 						]
 					)
 				;

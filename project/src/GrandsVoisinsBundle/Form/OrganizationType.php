@@ -56,7 +56,9 @@ class OrganizationType extends AbstractForm
       'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#insuranceStatus'      => 'insuranceStatus',//aurore
       'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#arrivalNumber'        => 'arrivalNumber',//aurore
       'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus'        => 'thesaurus',
-    ];
+			'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' => 'documentedBy'
+
+		];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -254,7 +256,19 @@ class OrganizationType extends AbstractForm
 							'placeholder' => 'choisissez un batiment',
 							'choices' => array_flip(GrandsVoisinsConfig::$buildingsSimple),
 						]
-					);
+					)
+					->add(
+						$builder,
+						'documentedBy',
+						UriType::class,
+						[
+							'required'  => false,
+							'lookupUrl' => $options['lookupUrlPerson'],
+							'labelUrl'  => $options['lookupUrlLabel'],
+							'rdfType'   => GrandsVoisinsConfig::URI_PAIR_DOCUMENT,
+						]
+					)
+				;
 
         //dump(array_flip($options['role']));
         //filter for field only available for aurore

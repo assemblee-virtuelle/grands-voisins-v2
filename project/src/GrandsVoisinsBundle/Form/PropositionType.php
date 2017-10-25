@@ -30,7 +30,9 @@ class PropositionType extends AbstractForm
         'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'                               => 'type',
         'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus'        => 'thesaurus',
         'http://xmlns.com/foaf/0.1/img'                                                  => 'image',
-    ];
+			'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' => 'documentedBy'
+
+		];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -132,7 +134,18 @@ class PropositionType extends AbstractForm
             [
               'required' => false,
             ]
-          );
+          )
+					->add(
+						$builder,
+						'documentedBy',
+						UriType::class,
+						[
+							'required'  => false,
+							'lookupUrl' => $options['lookupUrlPerson'],
+							'labelUrl'  => $options['lookupUrlLabel'],
+							'rdfType'   => GrandsVoisinsConfig::URI_PAIR_DOCUMENT,
+						]
+					);
 
         $builder->add('save', SubmitType::class, ['label' => 'Enregistrer']);
     }

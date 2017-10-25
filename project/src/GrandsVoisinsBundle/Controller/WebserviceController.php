@@ -354,7 +354,6 @@ class WebserviceController extends Controller
 					->addPrefix('default','http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#')
             ->addSelect('?uri')
             ->addFilter('?uri = <'.$url.'>');
-
         switch ($uriType) {
             case GrandsVoisinsConfig::URI_FOAF_PERSON :
                 $sparql->addSelect('( COALESCE(?familyName, "") As ?result)  (fn:concat(?givenName, " ", ?result) as ?label)')
@@ -389,7 +388,8 @@ class WebserviceController extends Controller
                     ->addSelect('( COALESCE(?name, "") As ?result_3)')
                     ->addSelect('( COALESCE(?label_test, "") As ?result_4)')
                     ->addSelect('( COALESCE(?skos, "") As ?result_5)')
-                    ->addSelect('(fn:concat(?result_5,?result_4,?result_3,?result_2, " ", ?result_1) as ?label)')
+                    ->addSelect('( COALESCE(?preferedLabel, "") As ?result_6)')
+                    ->addSelect('(fn:concat(?result_6,?result_5,?result_4,?result_3,?result_2, " ", ?result_1) as ?label)')
                     ->addWhere('?uri','rdf:type','?type','?gr')
                     ->addOptional('?uri','foaf:givenName','?givenName','?gr')
                     ->addOptional('?uri','foaf:familyName','?familyName','?gr')
@@ -398,6 +398,7 @@ class WebserviceController extends Controller
                     ->addOptional('?uri','skos:prefLabel','?skos','?gr')
                     ->addOptional('?uri','foaf:status','?desc','?gr')
                     ->addOptional('?uri','foaf:img','?image','?gr')
+                    ->addOptional('?uri','default:preferedLabel','?preferedLabel','?gr')
                     ->addOptional('?uri','gvoi:building','?building','?gr');
                 break;
         }
