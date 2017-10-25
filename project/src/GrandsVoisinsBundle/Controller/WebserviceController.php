@@ -143,7 +143,7 @@ class WebserviceController extends Controller
         $sparql->addWhere('?uri','rdf:type', '?type','?GR')
             ->groupBy('?uri ?type ?title ?image ?desc ?building')
             ->orderBy($sparql::ORDER_ASC,'?title');
-        $organizations =[]; echo $type;
+        $organizations =[];
         if($type == GrandsVoisinsConfig::Multiple || $typeOrganization ){
             $orgaSparql = clone $sparql;
 
@@ -158,7 +158,6 @@ class WebserviceController extends Controller
             //dump($orgaSparql->getQuery());
             $results = $sfClient->sparql($orgaSparql->getQuery());
             $organizations = $sfClient->sparqlResultsValues($results);
-            echo $orgaSparql->getQuery(); exit;
         }
 
         $persons = [];
