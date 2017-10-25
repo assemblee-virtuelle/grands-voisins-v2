@@ -26,6 +26,8 @@
         "http://xmlns.com/foaf/0.1/Project",
         "http://purl.org/NET/c4dm/event.owl#Event",
         "http://www.fipa.org/schemas#Proposition",
+          "http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#Document",
+          "http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#DocumentType",
     ];
 
       // Play intro only once.

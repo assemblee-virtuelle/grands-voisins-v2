@@ -49,11 +49,13 @@ class WebserviceController extends Controller
 				'name'   => 'Document',
 				'plural' => 'Documents',
 				'icon'   => 'folder-open',
+				'nameType' => 'document'
 			],
 			GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE  => [
 				'name'   => 'Type de document',
 				'plural' => 'Types de document',
 				'icon'   => 'pushpin',
+				'nameType' => 'documenttype'
 			],
     ];
 
@@ -128,7 +130,7 @@ class WebserviceController extends Controller
         return new JsonResponse($parameters->get());
     }
 
-    public function searchSparqlRequest($term, $type = GrandsVoisinsConfig::Multiple,$filter=null)
+    public function searchSparqlRequest($term, $type = GrandsVoisinsConfig::Multiple,$filter=null,$isBlocked = false)
     {
         $sfClient    = $this->container->get('semantic_forms.client');
         $arrayType = explode('|',$type);
@@ -270,7 +272,7 @@ class WebserviceController extends Controller
 						$documents= $sfClient->sparqlResultsValues($results);
 				}
 				$documentTypes = [];
-				if(($type == GrandsVoisinsConfig::Multiple || $typeDocumentType)&& $userLogged ){
+				if(($type == GrandsVoisinsConfig::Multiple || $typeDocumentType)&& !$isBlocked ){
 						$documentTypeSparql = clone $sparql;
 						$documentTypeSparql->addSelect('?title')
 							->addWhere('?uri','rdf:type', $sparql->formatValue(GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE,$sparql::VALUE_TYPE_URL),'?GR')
@@ -323,7 +325,8 @@ class WebserviceController extends Controller
             'results' => $this->searchSparqlRequest(
               $request->get('t'),
               ''
-              ,$request->get('f')
+              ,$request->get('f'),
+							true
             ),
           ]
         );
@@ -679,6 +682,29 @@ class WebserviceController extends Controller
 								$this->getData2($properties,$propertiesWithUri,$output);
 
                 break;
+						case GrandsVoisinsConfig::URI_PAIR_DOCUMENT:
+								if (isset($properties['description'])) {
+										$properties['description'] = nl2br(current($properties['description']),false);
+								}
+								$propertiesWithUri = [
+									'documents',
+									'references',
+									'referencesBy',
+									'hasType'
+								];
+								$this->getData2($properties,$propertiesWithUri,$output);
+								break;
+						//document type
+						case GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE:
+								if (isset($properties['description'])) {
+										$properties['description'] = nl2br(current($properties['description']),false);
+								}
+								$propertiesWithUri = [
+									'typeOf'
+								];
+								//dump($properties);exit;
+								$this->getData2($properties,$propertiesWithUri,$output);
+								break;
         }
         if (isset($properties['resourceProposed'])) {
             foreach ($properties['resourceProposed'] as $uri) {
@@ -804,8 +830,15 @@ class WebserviceController extends Controller
 																	'name' => ((current($component['thesaurus'])) ? current($component['thesaurus']) : "") ,
 																];
 																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
-
 														break;
+														case GrandsVoisinsConfig::URI_PAIR_DOCUMENT:
+														case GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE:
+																$result = [
+																	'uri' => $uri,
+																	'name' => ((current($component['preferedLabel'])) ? current($component['preferedLabel']) : ""),
+																];
+																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
+																break;
 												}
 												$cacheTemp[$uri] = $result;
 												$cacheTemp[$uri]['type'] = $componentType;

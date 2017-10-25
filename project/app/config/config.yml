@@ -68,6 +68,20 @@ parameters:
         fundedBy: "http://xmlns.com/foaf/0.1/fundedBy"
         #######
         subject: "http://purl.org/dc/elements/1.1/subject"
+
+        ### pair ###
+        preferedLabel: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#preferedLabel'
+        alternativeLabel: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#alternativeLabel'
+        description: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#description'
+        commentPAIR: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#comment'
+        aboutPage: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#aboutPage'
+        homePage: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#homePage'
+        documents: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents'
+        references: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#references'
+        hasType : 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#hasType'
+        referencesBy : 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#referencesBy'
+        typeOf: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#typeOf'
+        documentedBy: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy'
             # Mixed fields from user / organization.
     fields_access:
         anonymous:
@@ -107,6 +121,19 @@ parameters:
            #event
            - eventBegin
            - eventEnd
+            ### pair ###
+           - preferedLabel
+           - alternativeLabel
+           - description
+           - commentPAIR
+           - aboutPage
+           - homePage
+           - documents
+           - references
+           - hasType
+           - referencesBy
+           - typeOf
+           - documentedBy
         member:
            # all
            - mbox

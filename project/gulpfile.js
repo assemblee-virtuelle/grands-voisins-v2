@@ -23,6 +23,7 @@ var filesJs = {
     'web/admin/js/src/class/lgvAdminPageProfile.js',
     'web/admin/js/src/class/lgvAdminPageOrga.js',
     'web/admin/js/src/class/lgvAdminPageComponent.js',
+
     // Fields.
     'vendor/VirtualAssembly/SemanticFormsBundle/VirtualAssembly/SemanticFormsBundle/Resources/js/field.uri.js',
     'vendor/VirtualAssembly/SemanticFormsBundle/VirtualAssembly/SemanticFormsBundle/Resources/js/field.dbPedia.js',
@@ -44,7 +45,10 @@ var filesJs = {
   'web/front/src/gv-detail-person/gv-detail-person': true,
   'web/front/src/gv-detail-projet/gv-detail-projet': true,
   'web/front/src/gv-detail-event/gv-detail-event': true,
-  'web/front/src/gv-detail-proposition/gv-detail-proposition': true,
+    'web/front/src/gv-detail-document/gv-detail-document': true,
+    'web/front/src/gv-detail-documenttype/gv-detail-documenttype': true,
+
+    'web/front/src/gv-detail-proposition/gv-detail-proposition': true,
   'web/front/src/gv-map/gv-map': true,
   'web/front/src/gv-map-pin/gv-map-pin': true
 };
@@ -71,7 +75,10 @@ var filesScss = {
   'web/front/src/gv-detail-person/gv-detail-person': true,
   'web/front/src/gv-detail-projet/gv-detail-projet': true,
   'web/front/src/gv-detail-event/gv-detail-event': true,
-  'web/front/src/gv-detail-proposition/gv-detail-proposition': true,
+    'web/front/src/gv-detail-document/gv-detail-document': true,
+    'web/front/src/gv-detail-documenttype/gv-detail-documenttype': true,
+
+    'web/front/src/gv-detail-proposition/gv-detail-proposition': true,
   'web/front/src/gv-logo-animated/gv-logo-animated': true,
   'web/front/src/gv-map/gv-map': true,
   'web/front/src/gv-map-pin/gv-map-pin': true
