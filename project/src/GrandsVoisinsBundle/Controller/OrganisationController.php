@@ -235,8 +235,6 @@ class OrganisationController extends Controller
         $encryption = $this->container->get('GrandsVoisinsBundle.encryption');
         /** @var \VirtualAssembly\SparqlBundle\Services\SparqlClient $sparqlClient */
         $sparqlClient   = $this->container->get('sparqlbundle.client');
-        $predicatImage  = $this->getParameter('semantic_forms.fields_aliases')['image'];
-
         /* @var $organisationEntity \GrandsVoisinsBundle\Repository\OrganisationRepository */
         // Ask database to know if organization has been already created.
         $organisationEntity = $this->getDoctrine()->getManager()->getRepository(
@@ -271,15 +269,15 @@ class OrganisationController extends Controller
         $oldPictureName = $organization->getOrganisationPicture();
 
         $sfLink = $organization->getSfOrganisation();
-
+				$organizationConf = $this->getParameter('organizationConf');
         // Build main form.
         $options = [
           'login'                 => $sfUser,
           'password'              => $sfPassword,
           'graphURI'              => $organization->getGraphURI(),
           'client'                => $sfClient,
-          'spec'                  => GrandsVoisinsConfig::SPEC_ORGANIZATION,
-          'reverse'               => GrandsVoisinsConfig::REVERSE,
+          'sfConf'                  => $organizationConf,
+          'spec'               => $organizationConf['spec'],
           'lookupUrlLabel'        => $this->generateUrl(
             'webserviceFieldUriLabel'
           ),

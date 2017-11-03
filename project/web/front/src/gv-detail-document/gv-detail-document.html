@@ -22,10 +22,10 @@
                   <td>[[alternativeLabel]]</td>
                 </tr>
               </template>
-              <template is="dom-if" if="[[commentPAIR]]">
+              <template is="dom-if" if="[[comment]]">
                 <tr class="field">
                   <td class="fieldLabel">Commentaire</td>
-                  <td>[[commentPAIR]]</td>
+                  <td>[[comment]]</td>
                 </tr>
               </template>
               <template is="dom-if" if="[[homePage]]">
@@ -55,10 +55,10 @@
         </div>
       </div>
       <div class="col col-sm-4 side-blocks">
-        <template is="dom-if" if="[[data.thesaurus.thesaurus.length]]">
+        <template is="dom-if" if="[[data.thesaurus.length]]">
           <h3>Domaine(s) d'activité(s)</h3>
           <div class="tags-cloud">
-            <template is="dom-repeat" items="{{data.thesaurus.thesaurus}}">
+            <template is="dom-repeat" items="{{data.thesaurus}}">
               <a href="#" rel="{{ item.uri }}" target="_blank" on-click="onClickThematic">
                 {{item.name}}</a>
             </template>

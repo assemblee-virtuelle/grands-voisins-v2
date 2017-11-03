@@ -16,23 +16,7 @@ use VirtualAssembly\SemanticFormsBundle\SemanticFormsBundle;
 
 class PropositionType extends AbstractForm
 {
-    var $fieldsAliases = [
-        'http://xmlns.com/foaf/0.1/maker'                                            => 'maker',
-        'http://xmlns.com/foaf/0.1/mbox'                                                => 'mbox',
-        'http://www.w3.org/2000/01/rdf-schema#label'                                    => 'label',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description' => 'description',
-        'http://xmlns.com/foaf/0.1/status'                                              => 'shortDescription',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#building'    => 'building',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#room'        => 'room',
-        'http://xmlns.com/foaf/0.1/topic_interest'                                      => 'topicInterest',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded'   => 'resourceNeeded',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed' => 'resourceProposed',
-        'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'                               => 'type',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus'        => 'thesaurus',
-        'http://xmlns.com/foaf/0.1/img'                                                  => 'image',
-			'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' => 'documentedBy'
 
-		];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

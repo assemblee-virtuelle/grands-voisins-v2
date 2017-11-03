@@ -12,7 +12,7 @@ Polymer({
     this.topicInterest = this.data.topicInterest;
     this.resourceNeeded = this.data.resourceNeeded;
     this.resourceProposed = this.data.resourceProposed;
-    this.expertize = this.data.expertize;
+    this.expertise = this.data.expertise;
     this.knows = this.data.knows;
     //log(this.data.building);
     this.buildingTitle = gvc.buildings[this.data.building].title;

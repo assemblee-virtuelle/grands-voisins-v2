@@ -221,14 +221,15 @@ class AdminController extends Controller
 					->getRepository('GrandsVoisinsBundle:Organisation')
 					->find($this->getUser()->getFkOrganisation());
 
+				$personConf = $this->getParameter('profileConf');
 				// Build main form.
 				$options = [
 					'login'                 => $user->getEmail(),
 					'password'              => $encryption->decrypt($user->getSfUser()),
 					'graphURI'              => $organisation->getGraphURI(),
 					'client'                => $sfClient,
-					'reverse'               => GrandsVoisinsConfig::REVERSE,
-					'spec'                  => GrandsVoisinsConfig::SPEC_PERSON,
+					'sfConf'               => $personConf,
+					'spec'                  => $personConf['spec'],
 					'lookupUrlLabel'        => $this->generateUrl(
 						'webserviceFieldUriLabel'
 					),

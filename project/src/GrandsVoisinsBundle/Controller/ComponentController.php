@@ -83,7 +83,7 @@ class ComponentController extends Controller
             $this->componentName
           ).'Type';
 
-        $specName = 'SPEC_'.strtoupper($request->get('component'));
+				$componentConf = $this->getParameter($this->componentName.'Conf');
 
         $form = $this->createForm(
           $componentClassName,
@@ -93,10 +93,8 @@ class ComponentController extends Controller
             'password'              => $encryption->decrypt($user->getSfUser()),
             'graphURI'              => $organisation->getGraphURI(),
             'client'                => $sfClient,
-            'reverse'               => GrandsVoisinsConfig::REVERSE,
-            'spec'                  => constant(
-              'GrandsVoisinsBundle\GrandsVoisinsConfig::'.$specName
-            ),
+						'sfConf'               => $componentConf,
+						'spec'                  => $componentConf['spec'],
             'values'                => $request->get('uri'),
             'lookupUrlLabel'        => $this->generateUrl(
               'webserviceFieldUriLabel'

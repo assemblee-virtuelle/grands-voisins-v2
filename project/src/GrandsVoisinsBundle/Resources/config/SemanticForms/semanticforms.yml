@@ -1,0 +1,463 @@
+parameters:
+  profileConf:
+    type: 'http://xmlns.com/foaf/0.1/Person'
+    spec: 'form-Person'
+    fields: 
+      http://xmlns.com/foaf/0.1/familyName:                                              
+        value: 'familyName'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/givenName:                                               
+        value: 'givenName'
+        access: 'anonymous'
+      http://www.w3.org/1999/02/22-rdf-syntax-ns#type:                                   
+        value: 'type'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/img:                                                     
+        value: 'image'
+        access: 'anonymous'
+      http://www.w3.org/ns/org#headOf:
+        value: 'headOf'
+        access: 'anonymous'
+      http://www.w3.org/ns/org#memberOf:                                                 
+        value: 'memberOf'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/homepage:                                                
+        value: 'homepage'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/mbox:                                                    
+        value: 'mbox'
+        access: 'member'
+      http://xmlns.com/foaf/0.1/phone:                                                   
+        value: 'phone'
+        access: 'member'
+#      http://xmlns.com/foaf/0.1/currentProject:
+#        value: 'currentProject'
+#        access: 'member'
+      http://xmlns.com/foaf/0.1/topic_interest:                                          
+        value: 'topicInterest'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/knows:                                                   
+        value: 'knows'
+        access: 'member'
+      http://purl.org/ontology/cco/core#expertise:                                       
+        value: 'expertise'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#slack:           
+        value: 'slack'
+        access: 'member'
+      http://xmlns.com/foaf/0.1/birthday:                                                
+        value: 'birthday'
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#postalCode:      
+        value: 'postalCode'
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#city:            
+        value: 'city'
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded:  
+        value: 'resourceNeeded'
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed:
+        value: 'resourceProposed'
+        access: 'member'
+      http://xmlns.com/foaf/0.1/status:                                                  
+        value: 'shortDescription'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description:     
+        value: 'description'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus:       
+        value: 'thesaurus'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/made:
+        value: 'made'
+        access: 'anonymous'
+    reverse: null
+    
+  organizationConf:
+    type: 'http://xmlns.com/foaf/0.1/Organization'
+    spec: 'form-Organization'
+    fields:
+      http://www.w3.org/1999/02/22-rdf-syntax-ns#type:                                        
+        value: 'type' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/name:                                                         
+        value: 'name' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#administrativeName:   
+        value: 'administrativeName' 
+        access: 'super_admin'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description:
+        value: 'description'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/status:                                                       
+        value: 'shortDescription' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/topic_interest:                                               
+        value: 'topicInterest' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#conventionType:       
+        value: 'conventionType' 
+        access: 'super_admin'
+      http://www.w3.org/ns/org#Head:                                                          
+        value: 'head' 
+        access: 'anonymous'
+      http://www.w3.org/ns/org#hasMember:                                                     
+        value: 'hasMember' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#employeesCount:       
+        value: 'employeesCount' 
+        access: 'super_admin'
+      http://xmlns.com/foaf/0.1/homepage:                                                     
+        value: 'homepage' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/phone:                                                        
+        value: 'phone' 
+        access: 'member'
+      http://xmlns.com/foaf/0.1/mbox:                                                         
+        value: 'mbox'
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#arrivalDate:          
+        value: 'arrivalDate' 
+        access: 'member' 
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#building:             
+        value: 'building' 
+        access: 'anonymous' 
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#room:                 
+        value: 'room' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#status:               
+        value: 'status' 
+        access: 'anonymous' 
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#twitter:              
+        value: 'twitter' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#linkedin:             
+        value: 'linkedin' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#facebook:             
+        value: 'facebook' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/img:                                                          
+        value: 'img'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#proposedContribution: 
+        value: 'proposedContribution' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#realisedContribution: 
+        value: 'realisedContribution' 
+        access: 'member'
+      http://www.w3.org/ns/org#OrganizationalCollaboration:                                   
+        value: 'OrganizationalCollaboration' 
+        access: 'anonymous'
+#      http://xmlns.com/foaf/0.1/depiction:
+#        value: 'depiction'
+#        access: 'anonymous'
+#      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#isReferencedBy:
+#        value: 'isReferencedBy'
+#        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded:       
+        value: 'resourceNeeded' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed:     
+        value: 'resourceProposed' 
+        access: 'member'
+#      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#volunteeringProposals:
+#        value: 'volunteeringProposals'
+#        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#contributionType:     
+        value: 'contributionType' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#leavingDate:          
+        value: 'leavingDate' 
+        access: 'super_admin'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#newLocation:          
+        value: 'newLocation'
+        access: 'anonymous'
+#      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#haveBenefitOf:
+#        value: 'haveBenefitOf'
+#        access: 'super_admin'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#insuranceStatus:      
+        value: 'insuranceStatus' 
+        access: 'super_admin'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#arrivalNumber:        
+        value: 'arrivalNumber' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus:            
+        value: 'thesaurus' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy:                
+        value: 'documentedBy' 
+        access: 'anonymous'
+      http://www.w3.org/ns/org#memberOf:                                                 
+        value: 'memberOf'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/made:
+        value: 'made'
+        access: 'anonymous'
+    reverse:
+      http://xmlns.com/foaf/0.1/Head: 'http://www.w3.org/ns/org#headOf'
+      http://www.w3.org/ns/org#hasMember: 'http://www.w3.org/ns/org#memberOf'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents'
+
+  projectConf:
+    type: 'http://xmlns.com/foaf/0.1/Project'
+    spec: 'form-Project'
+    fields:
+      http://www.w3.org/1999/02/22-rdf-syntax-ns#type:                                
+        value: 'type' 
+        access: 'anonymous'
+      http://www.w3.org/2000/01/rdf-schema#label:                                     
+        value: 'label' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description:  
+        value: 'description' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/status:                                             
+        value: 'shortDescription' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/maker:                                                
+        value: 'maker' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#projectStart: 
+        value: 'projectStart' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#room:         
+        value: 'room' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/homepage:                                             
+        value: 'homepage' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/mbox:                                                 
+        value: 'mbox' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#building:     
+        value: 'building' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/topic_interest:                                       
+        value: 'topicInterest' 
+        access: 'anonymous'
+#      http://xmlns.com/foaf/0.1/depiction:
+#        value: 'depiction'
+#        access: 'anonymous'
+      http://www.w3.org/ns/org#Head:                                                  
+        value: 'head' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded:   
+        value: 'resourceNeeded' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed: 
+        value: 'resourceProposed' 
+        access: 'member'
+#      http://xmlns.com/foaf/0.1/isPrimaryTopicOf:
+#        value: 'isPrimaryTopicOf'
+#        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus:        
+        value: 'thesaurus' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/img:                                                  
+        value: 'image' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy: 
+        value: 'documentedBy' 
+        access: 'anonymous'
+    reverse:
+    http://www.w3.org/ns/org#Head: 'http://xmlns.com/foaf/0.1/made'
+    http://xmlns.com/foaf/0.1/maker: 'http://xmlns.com/foaf/0.1/made'
+    http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents'
+
+  eventConf:
+    type: 'http://purl.org/NET/c4dm/event.owl#Event'
+    spec: 'form-Event'
+    fields:
+      http://www.w3.org/1999/02/22-rdf-syntax-ns#type:                               
+        value: 'type' 
+        access: 'anonymous'
+      http://www.w3.org/2000/01/rdf-schema#label:                                    
+        value: 'label' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/status:                                              
+        value: 'shortDescription' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description: 
+        value: 'description' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/maker:                                               
+        value: 'maker' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#eventBegin:  
+        value: 'eventBegin' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#eventEnd:    
+        value: 'eventEnd' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#room:        
+        value: 'room' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/mbox:                                                
+        value: 'mbox' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#building:    
+        value: 'building' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/topic_interest:                                      
+        value: 'topicInterest' 
+        access: 'anonymous'
+#      http://xmlns.com/foaf/0.1/fundedBy:
+#        value: 'fundedBy'
+#        access: 'anonymous'
+#      http://www.w3.org/ns/org#OrganizationalCollaboration:
+#        value: 'OrganizationalCollaboration'
+#        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded:   
+        value: 'resourceNeeded' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed: 
+        value: 'resourceProposed' 
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus:        
+        value: 'thesaurus' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/img:                                                  
+        value: 'image' 
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/homepage:																								
+        value: 'homepage' 
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy: 
+        value: 'documentedBy' 
+        access: 'anonymous'
+    reverse:
+      http://xmlns.com/foaf/0.1/maker: 'http://xmlns.com/foaf/0.1/made'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents'
+      
+  propositionConf:
+    type: 'http://www.fipa.org/schemas#Proposition'
+    spec: 'form-Proposition'
+    fields:
+      http://xmlns.com/foaf/0.1/maker:
+        value: 'maker'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/mbox:
+        value: 'mbox'
+        access: 'member'
+      http://www.w3.org/2000/01/rdf-schema#label:
+        value: 'label'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description:
+        value: 'description'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/status:
+        value: 'shortDescription'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#building:
+        value: 'building'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#room:
+        value: 'room'
+        access: 'member'
+      http://xmlns.com/foaf/0.1/topic_interest:
+        value: 'topicInterest'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded:
+        value: 'resourceNeeded'
+        access: 'member'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed:
+        value: 'resourceProposed'
+        access: 'member'
+      http://www.w3.org/1999/02/22-rdf-syntax-ns#type:
+        value: 'type'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus:
+        value: 'thesaurus'
+        access: 'anonymous'
+      http://xmlns.com/foaf/0.1/img:
+        value: 'image'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy:
+        value: 'documentedBy'
+        access: 'anonymous'
+    reverse:
+      http://xmlns.com/foaf/0.1/maker: 'http://xmlns.com/foaf/0.1/made'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents'
+    
+  documenttypeConf:
+    type: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#DocumentType'
+    spec: 'form-DocumentType'
+    fields:
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#preferedLabel:
+        value: 'preferedLabel'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#alternativeLabel:
+        value: 'alternativeLabel'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#description:
+        value: 'description'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#comment:
+        value: 'comment'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#aboutPage:
+        value: 'aboutPage'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#homePage:
+        value: 'homePage'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#typeOf:
+        value: 'typeOf'
+        access: 'anonymous'
+      http://www.w3.org/1999/02/22-rdf-syntax-ns#type:
+        value: 'type'
+        access: 'anonymous'
+    reverse: null
+  
+  documentConf:
+    type: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#Document'
+    spec: 'form-Document'
+    fields:
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#subjectOf_Pair:
+        value: 'subjectOfPAIR'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#preferedLabel:
+        value: 'preferedLabel'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#alternativeLabel:
+        value: 'alternativeLabel'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#description:
+        value: 'description'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#comment:
+        value: 'comment'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#aboutPage:
+        value: 'aboutPage'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#homePage:
+        value: 'homePage'
+        access: 'anonymous'
+    #        http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#represents:
+    #          value: 'represents'
+    #          access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents:
+        value: 'documents'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#references:
+        value: 'references'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#referencesBy:
+        value: 'referencesBy'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#hasType:
+        value: 'hasType'
+        access: 'anonymous'
+      http://www.w3.org/1999/02/22-rdf-syntax-ns#type:
+        value: 'type'
+        access: 'anonymous'
+      http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus:
+        value: 'thesaurus'
+        access: 'anonymous'
+    reverse:
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#references: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#referencesBy'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#hasType: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#typeOf'
+      http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy'

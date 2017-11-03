@@ -17,28 +17,7 @@ use VirtualAssembly\SemanticFormsBundle\SemanticFormsBundle;
 
 class EventType extends AbstractForm
 {
-    var $fieldsAliases = [
-        'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'                               => 'type',
-        'http://www.w3.org/2000/01/rdf-schema#label'                                    => 'label',
-        'http://xmlns.com/foaf/0.1/status'                                              => 'shortDescription',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description' => 'description',
-        'http://xmlns.com/foaf/0.1/maker'                                               => 'maker',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#eventBegin'  => 'eventBegin',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#eventEnd'    => 'eventEnd',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#room'        => 'room',
-        'http://xmlns.com/foaf/0.1/mbox'                                                => 'mbox',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#building'    => 'building',
-        'http://xmlns.com/foaf/0.1/topic_interest'                                      => 'topicInterest',
-//      'http://xmlns.com/foaf/0.1/fundedBy' => 'fundedBy',
-//      'http://www.w3.org/ns/org#OrganizationalCollaboration' => 'OrganizationalCollaboration',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded'   => 'resourceNeeded',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed' => 'resourceProposed',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus'        => 'thesaurus',
-        'http://xmlns.com/foaf/0.1/img'                                                  => 'image',
-			'http://xmlns.com/foaf/0.1/homepage'																								=> 'homepage',
-							'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' => 'documentedBy'
 
-    ];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

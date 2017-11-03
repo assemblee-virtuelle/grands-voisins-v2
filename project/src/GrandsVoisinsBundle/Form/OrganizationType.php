@@ -19,46 +19,7 @@ use VirtualAssembly\SemanticFormsBundle\SemanticFormsBundle;
 
 class OrganizationType extends AbstractForm
 {
-    var $fieldsAliases = [
-      'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'                                        => 'type',
-      'http://xmlns.com/foaf/0.1/name'                                                         => 'name',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#administrativeName'   => 'administrativeName',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description'          => 'description',
-        'http://xmlns.com/foaf/0.1/status'                                                     => 'shortDescription',
-      'http://xmlns.com/foaf/0.1/topic_interest'                                               => 'topicInterest',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#conventionType'       => 'conventionType',
-      'http://www.w3.org/ns/org#Head'                                                          => 'head',
-      'http://www.w3.org/ns/org#hasMember'                                                     => 'hasMember',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#employeesCount'       => 'employeesCount',
-      'http://xmlns.com/foaf/0.1/homepage'                                                     => 'homepage',
-      'http://xmlns.com/foaf/0.1/phone'                                                        => 'phone',
-      'http://xmlns.com/foaf/0.1/mbox'                                                         => 'mbox',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#arrivalDate'          => 'arrivalDate', //aurore
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#building'             => 'building', //aurore
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#room'                 => 'room', //aurore
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#status'               => 'status', //aurore
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#twitter'              => 'twitter',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#linkedin'             => 'linkedin',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#facebook'             => 'facebook',
-      'http://xmlns.com/foaf/0.1/img'                                                          => 'img',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#proposedContribution' => 'proposedContribution',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#realisedContribution' => 'realisedContribution',
-      'http://www.w3.org/ns/org#OrganizationalCollaboration'                                   => 'OrganizationalCollaboration',
-//      'http://xmlns.com/foaf/0.1/depiction'                                                  => 'depiction',
-//      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#isReferencedBy'     => 'isReferencedBy',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded'       => 'resourceNeeded',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed'     => 'resourceProposed',
-//      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#volunteeringProposals' => 'volunteeringProposals',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#contributionType'     => 'contributionType',
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#leavingDate'          => 'leavingDate',//aurore
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#newLocation'          => 'newLocation',//aurore
-//      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#haveBenefitOf'        => 'haveBenefitOf',//aurore
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#insuranceStatus'      => 'insuranceStatus',//aurore
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#arrivalNumber'        => 'arrivalNumber',//aurore
-      'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus'        => 'thesaurus',
-			'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' => 'documentedBy'
 
-		];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

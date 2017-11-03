@@ -36,40 +36,7 @@ class GrandsVoisinsConfig
 
     const Multiple = '';
 
-    const REVERSE = [
-      GrandsVoisinsConfig::URI_FOAF_ORGANIZATION =>[// person => orga
-        'http://www.w3.org/ns/org#hasMember' => 'http://www.w3.org/ns/org#memberOf',
-				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' =>'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents',
 
-			],
-      GrandsVoisinsConfig::URI_FOAF_PROJECT => [
-        'http://www.w3.org/ns/org#Head' => 'http://xmlns.com/foaf/0.1/made',
-        'http://xmlns.com/foaf/0.1/maker' => 'http://xmlns.com/foaf/0.1/made',
-				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' =>'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents',
-
-			],
-      GrandsVoisinsConfig::URI_FIPA_PROPOSITION => [
-        'http://xmlns.com/foaf/0.1/maker' => 'http://xmlns.com/foaf/0.1/made',
-				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' =>'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents',
-
-			],
-      GrandsVoisinsConfig::URI_PURL_EVENT => [
-        'http://xmlns.com/foaf/0.1/maker' => 'http://xmlns.com/foaf/0.1/made',
-				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy' =>'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents',
-      ],
-			GrandsVoisinsConfig::URI_PAIR_DOCUMENT => [
-				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#references' => 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#referencesBy',
-				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#hasType' => 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#typeOf',
-				'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents' => 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy'
-			],
-    ];
-    CONST SPEC_PERSON = 'form-Person';
-    CONST SPEC_ORGANIZATION = 'form-Organization';
-    CONST SPEC_PROJECT = 'form-Project';
-    CONST SPEC_EVENT = 'form-Event';
-    CONST SPEC_PROPOSITION = 'form-Proposition';
-		CONST SPEC_DOCUMENT = 'form-Document';
-		CONST SPEC_DOCUMENTTYPE = 'form-DocumentType';
     const PREFIX = 'urn:gv/contacts/new/row/';
 
 

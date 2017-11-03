@@ -138,10 +138,10 @@
             <div class="clearfix"></div>
           </div>
         </template>
-        <template is="dom-if" if="[[expertize.length]]">
+        <template is="dom-if" if="[[expertise.length]]">
           <h3>Ses compétences</h3>
           <div class="tags-cloud tags-cloud-2">
-            <template is="dom-repeat" items="{{expertize}}">
+            <template is="dom-repeat" items="{{expertise}}">
               <a href="{{ item.uri }}" target="_blank">
                 <span class="glyphicon glyphicon-king"></span>{{item.name}}</a>
             </template>

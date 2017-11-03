@@ -14,7 +14,9 @@ use VirtualAssembly\SemanticFormsBundle\Services\SemanticFormsClient;
 
 class WebserviceController extends Controller
 {
-    var $entitiesTabs = [
+		const TYPE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type';
+
+		var $entitiesTabs = [
       GrandsVoisinsConfig::URI_FOAF_ORGANIZATION => [
         'name'   => 'Organisation',
         'plural' => 'Organisations',
@@ -115,7 +117,6 @@ class WebserviceController extends Controller
                 $output = [
                   'access'       => $access,
                   'name'         => $name,
-                  'fieldsAccess' => $this->container->getParameter('fields_access'),
                   'buildings'    => GrandsVoisinsConfig::$buildings,
                   'entities'     => $this->entitiesTabs,
                   'thesaurus'    => $thesaurus,
@@ -493,30 +494,29 @@ class WebserviceController extends Controller
     }
 
     public function uriPropertiesFiltered($uri)
-    {
-        $sfClient     = $this->container->get('semantic_forms.client');
-        $properties   = $sfClient->uriProperties($uri);
-        $output       = [];
-        $fieldsFilter = $this->container->getParameter('fields_access');
-        $user         = $this->GetUser();
-        $this
-          ->getDoctrine()
-          ->getManager()
-          ->getRepository('GrandsVoisinsBundle:User')
-          ->getAccessLevelString($user);
-        foreach ($fieldsFilter as $role => $fields) {
-            // User has role.
-            if ($role === 'anonymous' ||
-              $this->isGranted('ROLE_'.strtoupper($role))
-            ) {
-                foreach ($fields as $fieldName) {
-                    // Field should exist.
-                    if (isset($properties[$fieldName])) {
-                        $output[$fieldName] = $properties[$fieldName];
-                    }
-                }
-            }
-        }
+		{
+				$sfClient = $this->container->get('semantic_forms.client');
+				$properties = $sfClient->uriProperties($uri);
+				$sfConf = $this->getConf(current($properties[self::TYPE]));
+				$output = [];
+				$user = $this->GetUser();
+				$this
+					->getDoctrine()
+					->getManager()
+					->getRepository('GrandsVoisinsBundle:User')
+					->getAccessLevelString($user);
+				if ($sfConf != null){
+						foreach ($sfConf['fields'] as $field => $detail) {
+								if ($detail['access'] === 'anonymous' ||
+									$this->isGranted('ROLE_' . strtoupper($detail['access']))
+								) {
+										if (isset($properties[$field])) {
+												$output[$detail['value']] = $properties[$field];
+										}
+								}
+						}
+				}
+				else $output = $properties;
 
         return $output;
     }
@@ -589,9 +589,9 @@ class WebserviceController extends Controller
 												];
 										}
 								}
-								if (isset($properties['expertize'])) {
-										foreach ($properties['expertize'] as $uri) {
-												$output['expertize'][] = [
+								if (isset($properties['expertise'])) {
+										foreach ($properties['expertise'] as $uri) {
+												$output['expertise'][] = [
 													'uri'  => $uri,
 													'name' => $sfClient->dbPediaLabel($uri),
 												];
@@ -731,7 +731,13 @@ class WebserviceController extends Controller
             }
         }
         if (isset($properties['thesaurus'])) {
-						$output['thesaurus'][] = $this->getData2($properties,['thesaurus'],$output);
+						foreach ($properties['thesaurus'] as $uri) {
+								$result = [
+									'uri' => $uri,
+									'name' => $this->sparqlGetLabel($uri, GrandsVoisinsConfig::URI_SKOS_THESAURUS)
+								];
+								$output['thesaurus'][] = $result;
+						}
         }
         if (isset($properties['description'])) {
             $properties['description'] = nl2br(current($properties['description']),false);
@@ -767,8 +773,8 @@ class WebserviceController extends Controller
 
 																$result = [
 																	'uri' => $uri,
-																	'name' => ((current($component['foafName'])) ? current($component['foafName']) : ""),
-																	'image' => (!isset($component['image'])) ? '/common/images/no_avatar.jpg' : $component['image'],
+																	'name' => ((current($component['name'])) ? current($component['name']) : ""),
+																	'image' => (!isset($component['img'])) ? '/common/images/no_avatar.jpg' : $component['img'],
 																];
 																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
 
@@ -776,20 +782,14 @@ class WebserviceController extends Controller
 														case GrandsVoisinsConfig::URI_PURL_EVENT:
 														case GrandsVoisinsConfig::URI_FOAF_PROJECT:
 														case GrandsVoisinsConfig::URI_FIPA_PROPOSITION:
-														sort($component['displayLabel']);
+														sort($component['label']);
 																$result = [
 																	'uri' => $uri,
-																	'name' => ((end($component['displayLabel'])) ? end($component['displayLabel']) : "") ,
+																	'name' => ((end($component['label'])) ? end($component['label']) : "") ,
 																	'image' => (!isset($component['image'])) ? '/common/images/no_avatar.jpg' : $component['image'],
 																];
 																$output[$alias][$this->entitiesTabs[$componentType]['nameType']][] = $result;
 																break;
-														case GrandsVoisinsConfig::URI_SKOS_THESAURUS:
-																$result = [
-																	'uri' => $uri,
-																	'name' => ((current($component['displayLabel'])) ? current($component['displayLabel']) : "") ,
-																];
-																$output[$alias]['thesaurus'][] = $result;
 														break;
 														case GrandsVoisinsConfig::URI_PAIR_DOCUMENT:
 														case GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE:
@@ -828,4 +828,31 @@ class WebserviceController extends Controller
 
         return $filtered;
     }
+		private function getConf($type){
+				$conf = null;
+				switch ($type){
+						case GrandsVoisinsConfig::URI_FOAF_PERSON:
+								$conf = $this->getParameter('profileConf');
+								break;
+						case GrandsVoisinsConfig::URI_FOAF_ORGANIZATION:
+								$conf = $this->getParameter('organizationConf');
+								break;
+						case GrandsVoisinsConfig::URI_FOAF_PROJECT:
+								$conf = $this->getParameter('projectConf');
+								break;
+						case GrandsVoisinsConfig::URI_PURL_EVENT:
+								$conf = $this->getParameter('eventConf');
+								break;
+						case GrandsVoisinsConfig::URI_FIPA_PROPOSITION:
+								$conf = $this->getParameter('propositionConf');
+								break;
+						case GrandsVoisinsConfig::URI_PAIR_DOCUMENT:
+								$conf = $this->getParameter('documentConf');
+								break;
+						case GrandsVoisinsConfig::URI_PAIR_DOCUMENT_TYPE:
+								$conf = $this->getParameter('documenttypeConf');
+								break;
+				}
+				return $conf;
+		}
 }

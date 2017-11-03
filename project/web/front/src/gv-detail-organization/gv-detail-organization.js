@@ -24,7 +24,7 @@ Polymer({
     this.head = this.data.head;
     this.memberOf = this.data.memberOf;
     // Computed values.
-    this.title = this.data.properties.foafName;
+    this.title = this.data.properties.name;
     this.buildingTitle = gvc.buildings[this.data.properties.building].title;
   },
 

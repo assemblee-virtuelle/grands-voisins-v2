@@ -18,30 +18,6 @@ use VirtualAssembly\SemanticFormsBundle\SemanticFormsBundle;
 
 class ProfileType extends AbstractForm
 {
-    var $fieldsAliases = [
-        'http://xmlns.com/foaf/0.1/familyName'                                               => 'familyName',
-        'http://xmlns.com/foaf/0.1/givenName'                                                => 'givenName',
-        'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'                                    => 'type',
-        'http://xmlns.com/foaf/0.1/img'                                                      => 'image',
-        'http://xmlns.com/foaf/0.1/headOf'                                                   => 'headOf',
-        'http://www.w3.org/ns/org#memberOf'                                                  => 'memberOf',
-        'http://xmlns.com/foaf/0.1/homepage'                                                 => 'homepage',
-        'http://xmlns.com/foaf/0.1/mbox'                                                     => 'mbox',
-        'http://xmlns.com/foaf/0.1/phone'                                                    => 'phone',
-        //'http://xmlns.com/foaf/0.1/currentProject'                                           => 'currentProject',
-        'http://xmlns.com/foaf/0.1/topic_interest'                                           => 'topicInterest',
-        'http://xmlns.com/foaf/0.1/knows'                                                    => 'knows',
-        'http://purl.org/ontology/cco/core#expertise'                                        => 'expertise',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#slack'            => 'slack',
-        'http://xmlns.com/foaf/0.1/birthday'                                                 => 'birthday',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#postalCode'       => 'postalCode',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#city'             => 'city',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceNeeded'   => 'resourceNeeded',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#ressouceProposed' => 'resourceProposed',
-        'http://xmlns.com/foaf/0.1/status'                                                   => 'shortDescription',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#description'          => 'description',
-        'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv.owl.ttl#thesaurus'        => 'thesaurus',
-    ];
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
