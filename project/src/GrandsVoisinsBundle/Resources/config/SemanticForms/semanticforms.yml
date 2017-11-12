@@ -1,7 +1,7 @@
 parameters:
   profileConf:
     type: 'http://xmlns.com/foaf/0.1/Person'
-    spec: 'form-Person'
+    spec: 'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv-forms.ttl#form-Person'
     fields: 
       http://xmlns.com/foaf/0.1/familyName:                                              
         value: 'familyName'
@@ -76,7 +76,7 @@ parameters:
     
   organizationConf:
     type: 'http://xmlns.com/foaf/0.1/Organization'
-    spec: 'form-Organization'
+    spec: 'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv-forms.ttl#form-Organization'
     fields:
       http://www.w3.org/1999/02/22-rdf-syntax-ns#type:                                        
         value: 'type' 
@@ -202,7 +202,7 @@ parameters:
 
   projectConf:
     type: 'http://xmlns.com/foaf/0.1/Project'
-    spec: 'form-Project'
+    spec: 'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv-forms.ttl#form-Project'
     fields:
       http://www.w3.org/1999/02/22-rdf-syntax-ns#type:                                
         value: 'type' 
@@ -268,7 +268,7 @@ parameters:
 
   eventConf:
     type: 'http://purl.org/NET/c4dm/event.owl#Event'
-    spec: 'form-Event'
+    spec: 'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv-forms.ttl#form-Event'
     fields:
       http://www.w3.org/1999/02/22-rdf-syntax-ns#type:                               
         value: 'type' 
@@ -333,7 +333,7 @@ parameters:
       
   propositionConf:
     type: 'http://www.fipa.org/schemas#Proposition'
-    spec: 'form-Proposition'
+    spec: 'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv-forms.ttl#form-Proposition'
     fields:
       http://xmlns.com/foaf/0.1/maker:
         value: 'maker'
@@ -383,7 +383,7 @@ parameters:
     
   documenttypeConf:
     type: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#DocumentType'
-    spec: 'form-DocumentType'
+    spec: 'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv-forms.ttl#form-DocumentType'
     fields:
       http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#preferedLabel:
         value: 'preferedLabel'
@@ -413,7 +413,7 @@ parameters:
   
   documentConf:
     type: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#Document'
-    spec: 'form-Document'
+    spec: 'http://assemblee-virtuelle.github.io/grands-voisins-v2/gv-forms.ttl#form-Document'
     fields:
       http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#subjectOf_Pair:
         value: 'subjectOfPAIR'
