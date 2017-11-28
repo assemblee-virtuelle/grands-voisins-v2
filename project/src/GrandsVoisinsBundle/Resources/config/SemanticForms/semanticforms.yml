@@ -196,7 +196,7 @@ parameters:
         value: 'made'
         access: 'anonymous'
     reverse:
-      http://xmlns.com/foaf/0.1/Head: 'http://www.w3.org/ns/org#headOf'
+      http://www.w3.org/ns/org#Head: 'http://www.w3.org/ns/org#headOf'
       http://www.w3.org/ns/org#hasMember: 'http://www.w3.org/ns/org#memberOf'
       http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documentedBy: 'http://assemblee-virtuelle.github.io/mmmfest/PAIR_temp.owl#documents'
 
